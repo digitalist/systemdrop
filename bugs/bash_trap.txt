@@ -1,0 +1,19 @@
+preexec () { :; }
+preexec_invoke_exec () {
+     [ -n "$COMP_LINE" ] && return  # do nothing if completing
+     [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+     local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+     cwd=$(pwd)
+     #ignore alias for mysql history search
+     [[ "$BASH_COMMAND" =~ historyMysql* ]] && return
+     #mysqlHistoryRunner --insert 1 --command "$BASH_COMMAND" --cwd $cwd --tag "$SHELLTAG"
+     #(sqlite3 ~/.bashdb.sqlite3 "INSERT INTO history (  command, arguments, cwd) values ( '$BASH_COMMAND', '', '$cwd')")
+
+     preexec "$this_command"
+}
+
+# this line ...->
+trap 'preexec_invoke_exec' DEBUG
+# causes error :
+# bash: child setpgid (2104 to 2099): Operation not permitted
+

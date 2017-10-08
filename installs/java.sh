@@ -9,7 +9,6 @@ grep fdesc /etc/fstab >>/dev/null || echo "fdesc	/dev/fd		fdescfs		rw	0	0" >> /e
 grep procfs /etc/fstab >>/dev/null || echo "proc	/proc		procfs		rw	0	0" >> /etc/fstab
 
 
-
 #env LD_PRELOAD=./jre64/lib/amd64/jli/libjli.so  ./jre64/bin/java
 #env LD_PRELOAD ~/lib/blah.so program
 #or env LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH

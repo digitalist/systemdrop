@@ -1,6 +1,9 @@
 # Project SystemDrop
 ##### Linux  -> FreeBSD migration notes, 2017
 
+##### 0. tl;dr: Running sum: 
+- FreeBSD GUI programs crash a lot less than Ubuntu's.
+- It feels faster (maybe because of Lumina)
 
 ## 1. Preface
 You are reading a fall/winter 2017 year notes about my  attempt[currently] to migrage from Linux (Ubuntu 14/17) to FreeBSD 11. 
@@ -107,10 +110,15 @@ do not add `if_iwm_load="YES"` to rc.confi, it can cause KERNEL PANIC
 - https://ramsdenj.com/2016/07/25/openvpn-on-freebsd-10_3.html#client-config
 - http://www.freebsddiary.org/openvpn.php
 
-## 8. Editors/Misc
+## 8. Editors/Misc/Java
 PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
+
+@todo: _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on 
+
 ## 9. Unresolved Issues
+- see `bugs/` directory 
 - sshfs, see `installs/sshfs.sh`
+- how to use ~/.login_conf and cap_mkdb? It's totally ignored!
 
 ## 10. Debug tools 
 - *truss* is *strace* of FreeBSD. Example:
@@ -119,11 +127,8 @@ PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
 - dtrace: kernel/userspace debugg tracing : 
 https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/dtrace.html    
 
-## 0. tl;dr: Running sum: 
-- FreeBSD GUI programs crash a lot less than Ubuntu.
-- It feels faster (maybe because of Lumina) 
     
-### LINKS
+### Notes and links
 http://adventurist.me/posts/028871
 https://wiki.archlinux.org/index.php/Xorg_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
 http://www.ivoras.net/blog/tree/2013-06-03.openvpn-on-freebsd.html

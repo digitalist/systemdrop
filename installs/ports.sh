@@ -7,10 +7,13 @@
 # cd /usr/ports/devel/subversion
 # make install clean
 
-# If the ports tree is not available, or pkg is being used to manage packages, Subversion can be installed as a package:
-pkg install -y subversion
+# if there was an error somewhere:
+svn cleanup /usr/ports
 
-#Check out a copy of the ports tree:
+# If the ports tree is not available, or pkg is being used to manage packages, Subversion can be installed as a package:
+pkg install -y security/ca_root_nss subversion
+
+#Check out a copy of the ports tree from GeoDNS mirror:
 svn checkout https://svn.FreeBSD.org/ports/head /usr/ports
 
 # As needed, update /usr/ports after the initial Subversion checkout:
