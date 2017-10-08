@@ -13,6 +13,11 @@ and the purpose of these notes is to document how I'm transferring my needs and 
 I do hope that FreeBSD will be much better for me in the long run, and while migrating your zone of comfort
 is a great deal of PITA, it's fun. And, I hope, these notes will save someone some time googling / rebooting
 
+`installs/` directory contains short scripts for basic install tasks. 
+They should be harmless. 
+
+For example: `sudo sh installs/java.sh` will install OpenJDK 8
+
 ## 2. Rationale
 There are two main reasons to migrate from Linux to FreeBSD
 - SystemD: abomination-from-another-dimension, ever mutating monster. 
@@ -47,10 +52,22 @@ installs/basic_packages_console.sh
 If you have enough time to read about it, choose ZFS. Choose UFS for experiments/recover/`fsck -yf`      
     
 ## 4. Basic differences from Linux
-- directory structure (/etc -> /usr/local/etc), `man hier`
-- default user shell is not bash (change for user: `chsh -s /usr/local/bin/bash`), avoid changing it for root
+- Linux is not an OS, Linux distribution (i.e. Ubuntu) is OS.
+- FreeBSD is OS. It has derivatives like TrueOS, friends like OpenBSD 
+- Directory structure (/etc -> /usr/local/etc), `man hier`
+- Default user shell is not bash (change for user: `chsh -s /usr/local/bin/bash`), avoid changing shell for root
 
-### Basic packages
+### Basic commands
+
+- symlinks:
+
+    Worth noticing, `ln -s` command mirrors its destination/target arguments on linux/BSD:
+    
+    ` ln -s destination source # Linux`
+    
+    ` ln -s source destination # FreeBSD`
+
+
 - Linux: `yum` / `apt` ... etc 
 - FreeBSD: `pkg`, ports,
 
@@ -59,6 +76,12 @@ If you have enough time to read about it, choose ZFS. Choose UFS for experiments
 
 - Ubuntu: `apt install -y vim`
 - FreeBSD: `pkg install -y vim`
+
+### Packages/ports system 
+FreeBSD has two (or more) modes of software distribution: 
+- packages (linux: yum/apt)
+- ports - building from source code ()see `installs/ports.sh`)
+
 
 see `installs/basic_packages.sh` for tools I needed during migration and/or am using now. All of them exist in Linux-world too.
 
