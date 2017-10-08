@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html id="XenForo" lang="en-US" dir="LTR" class="Public NoJs LoggedOut NoSidebar  Responsive" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	
+		<base href="https://forums.freebsd.org/" />
+		<script>
+			var _b = document.getElementsByTagName('base')[0], _bH = "https://forums.freebsd.org/";
+			if (_b && _b.href != _bH) _b.href = _bH;
+		</script>
+	
+
+	<title>Install Lumina Desktop on FreeBSD | The FreeBSD Forums</title>
+	
+	<noscript><style>.JsOnly, .jsOnly { display: none !important; }</style></noscript>
+	<link rel="stylesheet" href="css.php?css=xenforo,form,public&amp;style=3&amp;dir=LTR&amp;d=1494503601" />
+	<link rel="stylesheet" href="css.php?css=bb_code,freebsd_org_top_navigation_menu,likes_summary,login_bar,message,message_user_info,thread_view&amp;style=3&amp;dir=LTR&amp;d=1494503601" />
+	
+	
+
+	
+		<script src="js/jquery/jquery-1.11.0.min.js"></script>	
+		
+	<script src="js/xenforo/xenforo.js?_v=16052222"></script>
+
+	
+	<link rel="apple-touch-icon" href="https://forums.freebsd.org/styles/default/xenforo/logo.og.png" />
+	<link rel="alternate" type="application/rss+xml" title="RSS feed for The FreeBSD Forums" href="forums/-/index.rss" />
+	
+	
+	<link rel="canonical" href="https://forums.FreeBSD.org/threads/59304/" />
+	<meta name="description" content="To install Lumina Desktop on FreeBSD without login manager:
+
+1. by terminal
+
+# pkg install lumina xorg qt4-imageformats
+# sysrc zfs_enable=&quot;YES&quot;
+#..." />	<meta property="og:site_name" content="The FreeBSD Forums" />
+	<meta property="og:image" content="https://forums.freebsd.org/data/avatars/m/44/44281.jpg?1483809631" />
+	<meta property="og:image" content="https://forums.freebsd.org/styles/default/xenforo/logo.og.png" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://forums.FreeBSD.org/threads/59304/" />
+	<meta property="og:title" content="Install Lumina Desktop on FreeBSD" />
+	<meta property="og:description" content="To install Lumina Desktop on FreeBSD without login manager:
+
+1. by terminal
+
+# pkg install lumina xorg qt4-imageformats
+# sysrc zfs_enable=&quot;YES&quot;
+#..." />
+	
+	
+	
+
+</head>
+
+<body class="node4 node18 SelectQuotable">
+
+
+
+
+
+
+<div id="freebsd_headercontainer">
+			<div id="freebsd_header">
+			  <div id="freebsd_headerlogoleft">
+			    <a title="FreeBSD" href=".">
+			      <img width="457" height="75" alt="FreeBSD" src="./styles/freebsd/xenforo/freebsd_logo.png">
+			    </a>
+			  </div>
+			  <div id="freebsd_headerlogoright">
+			    <div class="frontdonateroundbox">
+			      <div class="frontdonatetop">
+				<div>
+				  <b style="display: none;">.</b>
+				</div>
+			      </div>
+			      <div class="frontdonatecontent">
+				<a href="http://www.FreeBSDFoundation.org/donate/">Donate to FreeBSD</a>
+			      </div>
+			      <div class="frontdonatebot">
+				<div>
+				  <b style="display: none;">.</b>
+				</div>
+			      </div>
+			    </div>
+			    <!-- freebsd search removed here -->
+			  </div>
+                
+                <!--
+                          <div id="search-box">
+				<form action="./search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="text" maxlength="128" title="Search for keywords" class="inputbox search" value="Search…" onclick="if(this.value=='Search…')this.value='';" onblur="if(this.value=='')this.value='Search…';" />
+					<input class="button2" value="Search" type="submit" /><br />
+					<a href="./search.php" title="View the advanced search options">Advanced search</a> 
+				</fieldset>
+				</form>
+                              </div>
+                              -->
+		
+			</div>
+			<div id="freebsd_menu">
+			  <ul class="first">
+			    <li>
+			      <a href="http://www.freebsd.org/">Home</a>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/about.html">About</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/projects/newbies.html">Introduction</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/features.html">Features</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/advocacy/">Advocacy</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/marketing/">Marketing</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/privacy.html">Privacy Policy</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/where.html">Get FreeBSD</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/releases/">Release Information</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/releng/">Release Engineering</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/docs.html">Documentation</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/faq/">FAQ</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/">Handbook</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/porters-handbook">Porter's Handbook</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook">Developer's Handbook</a>
+				</li>
+				<li>
+				  <a href="http://www.FreeBSD.org/cgi/man.cgi">Manual Pages</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/fdp-primer">Documentation Project Primer</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/docs/books.html">All Books and Articles</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/community.html">Community</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/community/mailinglists.html">Mailing Lists</a>
+				</li>
+				<li>
+				  <a href="http://forums.freebsd.org">Forums</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/usergroups.html">User Groups</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/events/events.html">Events</a>
+				</li>
+				<li>
+				  <a href="http://serverfault.com/questions/tagged/freebsd">Q&amp;A (external)</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/projects/index.html">Developers</a>
+			      <ul>
+				<li>
+				  <a href="http://wiki.FreeBSD.org/IdeasPage">Project Ideas</a>
+				</li>
+				<li>
+				  <a href="http://svnweb.FreeBSD.org">SVN Repository</a>
+				</li>
+				<li>
+				  <a href="http://p4web.FreeBSD.org">Perforce Repository</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/support.html">Support</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/commercial/commercial.html">Vendors</a>
+				</li>
+				<li>
+				  <a href="http://security.FreeBSD.org/">Security Information</a>
+				</li>
+				<li>
+				  <a href="http://www.FreeBSD.org/cgi/query-pr-summary.cgi">Bug Reports</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/send-pr.html">Submit Bug-report</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsdfoundation.org/">Foundation</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsdfoundation.org/donate/">Monetary Donations</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/donations/">Hardware Donations</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			</div>
+		      </div>
+
+
+	
+
+<div id="loginBar">
+	<div class="pageWidth">
+		<div class="pageContent">	
+			<h3 id="loginBarHandle">
+				<label for="LoginControl"><a href="login/" class="concealed noOutline">Log in or Sign up</a></label>
+			</h3>
+			
+			<span class="helper"></span>
+
+			
+		</div>
+	</div>
+</div>
+
+
+<div id="headerMover">
+	<div id="headerProxy"></div>
+
+<div id="content" class="thread_view">
+	<div class="pageWidth">
+		<div class="pageContent">
+			<!-- main content area -->
+			
+			
+			
+			
+						
+						
+						
+						
+						<div class="breadBoxTop ">
+							
+							
+
+<nav>
+	
+		
+			
+				
+			
+		
+			
+				
+			
+		
+	
+
+	<fieldset class="breadcrumb">
+		<a href="misc/quick-navigation-menu?selected=node-4" class="OverlayTrigger jumpMenuTrigger" data-cacheOverlay="true" title="Open quick navigation"><!--Jump to...--></a>
+			
+		<div class="boardTitle"><strong>The FreeBSD Forums</strong></div>
+		
+		<span class="crumbs">
+			
+			
+			
+				<span class="crust selectedTabCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+					<a href="https://forums.freebsd.org/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Forums</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="https://forums.freebsd.org/categories/18/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Base System</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="https://forums.freebsd.org/forums/4/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Installing and Upgrading FreeBSD</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav>
+						</div>
+						
+						
+						
+					
+						<!--[if lt IE 8]>
+							<p class="importantMessage">You are using an out of date browser. It  may not display this or other websites correctly.<br />You should upgrade or use an <a href="https://www.google.com/chrome/browser/" target="_blank">alternative browser</a>.</p>
+						<![endif]-->
+
+						
+						
+
+						
+						
+						
+						
+												
+							<!-- h1 title, description -->
+							<div class="titleBar">
+								
+								<h1>Install Lumina Desktop on FreeBSD</h1>
+								
+								<p id="pageDescription" class="muted ">
+	Discussion in '<a href="forums/4/">Installing and Upgrading FreeBSD</a>' started by <a href="members/44281/" class="username" dir="auto">nuklear</a>, <a href="threads/59304/"><span class="DateTime" title="Jan 13, 2017 at 7:07 PM">Jan 13, 2017</span></a>.
+</p>
+							</div>
+						
+						
+						
+						
+						
+						<!-- main template -->
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+<div class="pageNavLinkGroup">
+	<div class="linkGroup SelectionCountContainer">
+		
+		
+	</div>
+
+	
+</div>
+
+
+
+
+
+<form action="inline-mod/post/switch" method="post"
+	class="InlineModForm section"
+	data-cookieName="posts"
+	data-controls="#InlineModControls"
+	data-imodOptions="#ModerationSelect option">
+
+	<ol class="messageList" id="messageList">
+		
+			
+				
+
+
+<li id="post-339892" class="message   " data-author="nuklear">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/44281/" class="avatar Av44281m" data-avatarhtml="true"><img src="data/avatars/m/44/44281.jpg?1483809631" width="96" height="96" alt="nuklear" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/44281/" class="username" dir="auto" itemprop="name">nuklear</a>
+			<em class="userTitle" itemprop="title">Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=44281" class="concealed" rel="nofollow">40</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>6</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					To install Lumina Desktop on FreeBSD without login manager:<br />
+<br />
+1. by terminal<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+# pkg install lumina xorg qt4-imageformats
+# sysrc zfs_enable=&quot;YES&quot;
+# sysrc hald_enable=&quot;YES&quot;
+# sysrc dbus_enable=&quot;YES&quot;
+# sysrc moused_enable=&quot;YES&quot;
+# sysrc mixed_enable=&quot;YES&quot;</pre></div><br />
+2. edit  <tt style="color: #007a00;">~/.xinitrc</tt><br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>exec lumina-desktop</pre></div><br />
+3. after login<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>$ startx</pre></div><br />
+<br />
+That&#039;s all!<br />
+<br />
+Bye
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/44281/" class="username author" dir="auto">nuklear</a>,</span>
+					<a href="threads/59304/" title="Permalink" class="datePermalink"><span class="DateTime" title="Jan 13, 2017 at 7:07 PM">Jan 13, 2017</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/59304/" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/339892/permalink">#1</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-339892"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-339919" class="message   " data-author="aribi">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/51668/" class="avatar Av51668m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_male_m.png" width="96" height="96" alt="aribi" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/51668/" class="username" dir="auto" itemprop="name">aribi</a>
+			<em class="userTitle" itemprop="title">Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=51668" class="concealed" rel="nofollow">64</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>22</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Sorry to bug you on this, but I cannot imagine lumina requires zfs!
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/51668/" class="username author" dir="auto">aribi</a>,</span>
+					<a href="threads/59304/#post-339919" title="Permalink" class="datePermalink"><span class="DateTime" title="Jan 13, 2017 at 10:07 PM">Jan 13, 2017</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/59304/#post-339919" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/339919/permalink">#2</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-339919"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-339948" class="message   " data-author="nuklear">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/44281/" class="avatar Av44281m" data-avatarhtml="true"><img src="data/avatars/m/44/44281.jpg?1483809631" width="96" height="96" alt="nuklear" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/44281/" class="username" dir="auto" itemprop="name">nuklear</a>
+			<em class="userTitle" itemprop="title">Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=44281" class="concealed" rel="nofollow">40</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>6</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="aribi">
+	<aside>
+		
+			<div class="attribution type">aribi said:
+				
+					<a href="goto/post?id=339919#post-339919" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">Sorry to bug you on this, but I cannot imagine lumina requires zfs!</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>Ok don&#039;t set it...
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/44281/" class="username author" dir="auto">nuklear</a>,</span>
+					<a href="threads/59304/#post-339948" title="Permalink" class="datePermalink"><span class="DateTime" title="Jan 14, 2017 at 10:33 AM">Jan 14, 2017</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/59304/#post-339948" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/339948/permalink">#3</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-339948"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-339956" class="message   " data-author="MarcoB">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/5442/" class="avatar Av5442m" data-avatarhtml="true"><img src="data/avatars/m/5/5442.jpg?1413916050" width="96" height="96" alt="MarcoB" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/5442/" class="username" dir="auto" itemprop="name">MarcoB</a>
+			<em class="userTitle" itemprop="title">Active Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=5442" class="concealed" rel="nofollow">211</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>19</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Also no need for hal anymore either.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside>--<br />
+http://specs.tweak.to/4653<br />
+http://specs.tweak.to/18527</aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/5442/" class="username author" dir="auto">MarcoB</a>,</span>
+					<a href="threads/59304/#post-339956" title="Permalink" class="datePermalink"><span class="DateTime" title="Jan 14, 2017 at 12:54 PM">Jan 14, 2017</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/59304/#post-339956" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/339956/permalink">#4</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-339956"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-345253" class="message   " data-author="scrappywan">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/50110/" class="avatar Av50110m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_male_m.png" width="96" height="96" alt="scrappywan" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/50110/" class="username" dir="auto" itemprop="name">scrappywan</a>
+			<em class="userTitle" itemprop="title">Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=50110" class="concealed" rel="nofollow">23</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>0</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Sorry for my ignorance, but what is the purpose of adding: mixed_enable=&quot;YES&quot; to /etc/rc.conf?
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/50110/" class="username author" dir="auto">scrappywan</a>,</span>
+					<a href="threads/59304/#post-345253" title="Permalink" class="datePermalink"><span class="DateTime" title="Mar 12, 2017 at 7:08 PM">Mar 12, 2017</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/59304/#post-345253" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/345253/permalink">#5</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-345253"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-345325" class="message   " data-author="beanpole">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/41306/" class="avatar Av41306m" data-avatarhtml="true"><img src="data/avatars/m/41/41306.jpg?1485279770" width="96" height="96" alt="beanpole" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/41306/" class="username" dir="auto" itemprop="name">beanpole</a>
+			<em class="userTitle" itemprop="title">New Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=41306" class="concealed" rel="nofollow">15</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>36</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Nukear&#039;s post actually will result in a non-functional Lumina desktop session...<br />
+Try this instead:<br />
+<br />
+To install the package + X11 (can use other xorg packages instead, like &quot;xorg-minimal&quot; if you like)<br />
+<code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>pkg install lumina xorg</kbd></code><br />
+<br />
+To start a Lumina desktop session from the CLI:<br />
+<code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>start-lumina-desktop</kbd></code><br />
+<br />
+Alternatively, you can put &quot;exec start-lumina-desktop&quot; at the end of your <tt style="color: #007a00;">~/.xinitrc</tt>, and then you can run <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>startx</kbd></code> instead. (Typically used if you need to customize your X startup settings)<br />
+<br />
+<br />
+As far as other services which Lumina can use if enabled in <tt style="color: #007a00;">/etc/rc.conf</tt>:<br />
+zfs : Lumina is agnostic about this. You will need it for access to ZFS filesystems naturally, but Lumina does not require it in any way.<br />
+hald : **DO NOT USE**. This is the device detection system from Linux (and is old/vulnerable). Lumina has never needed this, and  never will.<br />
+moused : Probably a good idea. This is the mouse control daemon for FreeBSD, and while Lumina does not explicitly care how the mice are presented to the X11 server, moused seems to do the best job in my experience.<br />
+mixer : (NOTE: not &quot;mixed&quot; as mentioned in the posts above). If this is turned on, then Lumina can use the &quot;mixer&quot; utility to let the user change audio volume graphically. Not needed per-se, but is nice to have.<br />
+<br />
+dbus:<br />
+  This one is a bit more complicated due to a Qt bug, but Lumina itself neither needs or uses dbus.<br />
+  1) Enable the service in <tt style="color: #007a00;">/etc/rc.conf</tt>. This will turn on a root-permissioned DBUS server (generally for talking to consolekit or policykit - neither of which Lumina uses). I generally do not recommend/use this.<br />
+  2) Enable the service for the user&#039;s desktop session only (user-permissions). Just wrap the desktop init call as follows: <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>dbus-launch --exit-with-session start-lumina-desktop</kbd></code><br />
+  3) No DBUS service. After installing the Lumina package, just run (as root) <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>dbus-uuidgen --ensure</kbd></code>. That will simply save a unique ID string into <tt style="color: #007a00;">/var/db/dbus/machine-id</tt>. Once that file is there, then Qt will no longer crash on startup if there is no dbus session active on the system, and you can use Lumina normally without any dbus pollution on the system. This may cause issues with other apps that try to forcibly use dbus, but that is another topic for another time...<br />
+<br />
+NOTE: The <tt style="color: #007a00;">start-lumina-desktop</tt> routine for Lumina has gone through a number of changes in the last couple versions, and will automatically try to detect one of the three dbus service options listed above, and automatically start #2 (local dbus session) if no dbus session is currently active (root or user), and the &quot;machine-id&quot; file is not found on the system (just to ensure the Qt crash gets avoided).
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside>~~ Ken Moore ~~<br />
+TrueOS Developer</aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/41306/" class="username author" dir="auto">beanpole</a>,</span>
+					<a href="threads/59304/#post-345325" title="Permalink" class="datePermalink"><span class="DateTime" title="Mar 13, 2017 at 1:41 PM">Mar 13, 2017</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/59304/#post-345325" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/345325/permalink">#6</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-345325">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="members/44802/" class="username" dir="auto">Rod Myers</a>, <a href="members/39544/" class="username" dir="auto">xavi</a> and <a href="members/15192/" class="username" dir="auto">jdakhayman</a> thank for this.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-345358" class="message   " data-author="ANOKNUSA">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/44375/" class="avatar Av44375m" data-avatarhtml="true"><img src="data/avatars/m/44/44375.jpg?1426188300" width="96" height="96" alt="ANOKNUSA" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/44375/" class="username" dir="auto" itemprop="name">ANOKNUSA</a>
+			<em class="userTitle" itemprop="title">Aspiring Daemon</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=44375" class="concealed" rel="nofollow">665</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>352</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="beanpole">
+	<aside>
+		
+			<div class="attribution type">beanpole said:
+				
+					<a href="goto/post?id=345325#post-345325" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">mixer : (NOTE: not &quot;mixed&quot; as mentioned in the posts above). If this is turned on, then Lumina can use the &quot;mixer&quot; utility to let the user change audio volume graphically. Not needed per-se, but is nice to have.</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>This is started by default. When you get right down to it, all you should need to do is follow the <a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/x-config.html" target="_blank" class="externalLink" rel="nofollow"><i>Handbook</i> chapter on configuring X</a> and install Lumina, and it should just work.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside>Ask Questions the Smart Way  ::  Configs</aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/44375/" class="username author" dir="auto">ANOKNUSA</a>,</span>
+					<a href="threads/59304/#post-345358" title="Permalink" class="datePermalink"><span class="DateTime" title="Mar 13, 2017 at 8:45 PM">Mar 13, 2017</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/59304/#post-345358" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/345358/permalink">#7</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-345358">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="members/41306/" class="username" dir="auto">beanpole</a> thanks for this.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+		
+	</ol>
+
+	
+
+	<input type="hidden" name="_xfToken" value="" />
+
+</form>
+
+	<div class="pageNavLinkGroup">
+			
+				<div class="linkGroup">
+					
+						<label for="LoginControl"><a href="login/" class="concealed element">(You must log in or sign up to reply here.)</a></label>
+					
+				</div>
+			
+			<div class="linkGroup" style="display: none"><a href="javascript:" class="muted JsOnly DisplayIgnoredContent Tooltip" title="Show hidden content by ">Show Ignored Content</a></div>
+
+			
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+						
+						
+						
+						
+							<!-- login form, to be moved to the upper drop-down -->
+							
+
+
+
+
+
+
+
+<form action="login/login" method="post" class="xenForm " id="login" style="display:none">
+
+	
+
+	<div class="ctrlWrapper">
+		<dl class="ctrlUnit">
+			<dt><label for="LoginControl">Your name or email address:</label></dt>
+			<dd><input type="text" name="login" id="LoginControl" class="textCtrl" tabindex="101" /></dd>
+		</dl>
+	
+	
+		<dl class="ctrlUnit">
+			<dt>
+				<label for="ctrl_password">Do you already have an account?</label>
+			</dt>
+			<dd>
+				<ul>
+					<li><label for="ctrl_not_registered"><input type="radio" name="register" value="1" id="ctrl_not_registered" tabindex="105" />
+						No, create an account now.</label></li>
+					<li><label for="ctrl_registered"><input type="radio" name="register" value="0" id="ctrl_registered" tabindex="105" checked="checked" class="Disabler" />
+						Yes, my password is:</label></li>
+					<li id="ctrl_registered_Disabler">
+						<input type="password" name="password" class="textCtrl" id="ctrl_password" tabindex="102" />
+						<div class="lostPassword"><a href="lost-password/" class="OverlayTrigger OverlayCloser" tabindex="106">Forgot your password?</a></div>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+	
+		
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" class="button primary" value="Log in" tabindex="104" data-loginPhrase="Log in" data-signupPhrase="Sign up" />
+				<label for="ctrl_remember" class="rememberPassword"><input type="checkbox" name="remember" value="1" id="ctrl_remember" tabindex="103" /> Stay logged in</label>
+			</dd>
+		</dl>
+	</div>
+
+	<input type="hidden" name="cookie_check" value="1" />
+	<input type="hidden" name="redirect" value="/threads/59304/" />
+	<input type="hidden" name="_xfToken" value="" />
+
+</form>
+						
+						
+					
+			
+						
+			<div class="breadBoxBottom">
+
+<nav>
+	
+
+	<fieldset class="breadcrumb">
+		<a href="misc/quick-navigation-menu?selected=node-4" class="OverlayTrigger jumpMenuTrigger" data-cacheOverlay="true" title="Open quick navigation"><!--Jump to...--></a>
+			
+		<div class="boardTitle"><strong>The FreeBSD Forums</strong></div>
+		
+		<span class="crumbs">
+			
+			
+			
+				<span class="crust selectedTabCrumb">
+					<a href="https://forums.freebsd.org/" class="crumb"><span>Forums</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust">
+						<a href="https://forums.freebsd.org/categories/18/" class="crumb"><span>Base System</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust">
+						<a href="https://forums.freebsd.org/forums/4/" class="crumb"><span>Installing and Upgrading FreeBSD</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav></div>
+			
+						
+			
+						
+		</div>
+	</div>
+</div>
+
+<header>
+	
+
+
+<div id="header">
+	<div id="logoBlock">
+	<div class="pageWidth">
+		<div class="pageContent">
+			
+			
+			<div id="logo"><a href="https://forums.freebsd.org/">
+				<span></span>
+				<!-- <img src="styles/default/xenforo/logo.png" alt="The FreeBSD Forums" /> -->
+			</a></div>
+			
+			<span class="helper"></span>
+		</div>
+	</div>
+</div>
+	
+
+<div id="navigation" class="pageWidth withSearch">
+	<div class="pageContent">
+		<nav>
+
+<div class="navTabs">
+	<ul class="publicTabs">
+	
+		<!-- home -->
+		
+		
+		
+		<!-- extra tabs: home -->
+		
+		
+		
+		<!-- forums -->
+		
+			<li class="navTab forums selected">
+			
+				<a href="https://forums.freebsd.org/" class="navLink">Forums</a>
+				<a href="https://forums.freebsd.org/" class="SplitCtrl" rel="Menu"></a>
+				
+				<div class="tabLinks forumsTabLinks">
+					<div class="primaryContent menuHeader">
+						<h3>Forums</h3>
+						<div class="muted">Quick Links</div>
+					</div>
+					<ul class="secondaryContent blockLinksList">
+					
+						
+						<li><a href="search/?type=post">Search Forums</a></li>
+						
+						<li><a href="find-new/posts" rel="nofollow">Recent Posts</a></li>
+					
+					</ul>
+				</div>
+			</li>
+		
+		
+		
+		<!-- extra tabs: middle -->
+		
+		
+		
+		<!-- members -->
+						
+		
+		<!-- extra tabs: end -->
+		
+
+		<!-- responsive popup -->
+		<li class="navTab navigationHiddenTabs Popup PopupControl PopupClosed" style="display:none">	
+						
+			<a rel="Menu" class="navLink NoPopupGadget"><span class="menuIcon">Menu</span></a>
+			
+			<div class="Menu JsOnly blockLinksList primaryContent" id="NavigationHiddenMenu"></div>
+		</li>
+			
+		
+		<!-- no selection -->
+		
+		
+	</ul>
+	
+	
+</div>
+
+<span class="helper"></span>
+			
+		</nav>	
+	</div>
+</div>
+	
+
+<div id="searchBar" class="pageWidth">
+	
+	<span id="QuickSearchPlaceholder" title="Search">Search</span>
+	<fieldset id="QuickSearch">
+		<form action="search/search" method="post" class="formPopup">
+			
+			<div class="primaryControls">
+				<!-- block: primaryControls -->
+				<input type="search" name="keywords" value="" class="textCtrl" placeholder="Search..." title="Enter your search and hit enter" id="QuickSearchQuery" />				
+				<!-- end block: primaryControls -->
+			</div>
+			
+			<div class="secondaryControls">
+				<div class="controlsWrapper">
+				
+					<!-- block: secondaryControls -->
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+							<li><label><input type="checkbox" name="title_only" value="1"
+								id="search_bar_title_only" class="AutoChecker"
+								data-uncheck="#search_bar_thread" /> Search titles only</label></li>
+						</ul></dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_users">Posted by Member:</label></dt>
+						<dd>
+							<input type="text" name="users" value="" class="textCtrl AutoComplete" id="searchBar_users" />
+							<p class="explain">Separate names with a comma.</p>
+						</dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_date">Newer Than:</label></dt>
+						<dd><input type="date" name="date" value="" class="textCtrl" id="searchBar_date" /></dd>
+					</dl>
+					
+					
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+								
+									<li><label title="Search only Install Lumina Desktop on FreeBSD"><input type="checkbox" name="type[post][thread_id]" value="59304"
+	id="search_bar_thread" class="AutoChecker"
+	data-uncheck="#search_bar_title_only, #search_bar_nodes" /> Search this thread only</label></li>
+								
+									<li><label title="Search only Installing and Upgrading FreeBSD"><input type="checkbox" name="nodes[]" value="4"
+	id="search_bar_nodes" class="Disabler AutoChecker" checked="checked"
+	data-uncheck="#search_bar_thread" /> Search this forum only</label>
+	<ul id="search_bar_nodes_Disabler">
+		<li><label><input type="checkbox" name="type[post][group_discussion]" value="1"
+			id="search_bar_group_discussion" class="AutoChecker"
+			data-uncheck="#search_bar_thread" /> Display results as threads</label></li>
+	</ul></li>
+								
+						</ul></dd>
+					</dl>
+					
+				</div>
+				<!-- end block: secondaryControls -->
+				
+				<dl class="ctrlUnit submitUnit">
+					<dt></dt>
+					<dd>
+						<input type="submit" value="Search" class="button primary Tooltip" title="Find Now" />
+						<div class="Popup" id="commonSearches">
+							<a rel="Menu" class="button NoPopupGadget Tooltip" title="Useful Searches" data-tipclass="flipped"><span class="arrowWidget"></span></a>
+							<div class="Menu">
+								<div class="primaryContent menuHeader">
+									<h3>Useful Searches</h3>
+								</div>
+								<ul class="secondaryContent blockLinksList">
+									<!-- block: useful_searches -->
+									<li><a href="find-new/posts?recent=1" rel="nofollow">Recent Posts</a></li>
+									
+									<!-- end block: useful_searches -->
+								</ul>
+							</div>
+						</div>
+						<a href="search/" class="button moreOptions Tooltip" title="Advanced Search">More...</a>
+					</dd>
+				</dl>
+				
+			</div>
+			
+			<input type="hidden" name="_xfToken" value="" />
+		</form>		
+	</fieldset>
+	
+</div>
+</div>
+
+	
+	
+</header>
+
+</div>
+
+<footer>
+	
+
+
+<div class="footer">
+	<div class="pageWidth">
+		<div class="pageContent">
+			
+			<dl class="choosers">
+				
+					<dt>Style</dt>
+					<dd><a href="misc/style?redirect=%2Fthreads%2F59304%2F" class="OverlayTrigger Tooltip" title="Style Chooser" rel="nofollow">FreeBSD Style</a></dd>
+				
+				
+			</dl>
+			
+			
+			<ul class="footerLinks">
+			
+				
+					<li><a href="misc/contact" class="OverlayTrigger" data-overlayOptions="{&quot;fixed&quot;:false}">Contact Us</a></li>
+				
+				<li><a href="help/">Help</a></li>
+				<li><a href="https://forums.freebsd.org/" class="homeLink">Home</a></li>
+				<li><a href="/threads/59304/#navigation" class="topLink">Top</a></li>
+				<li><a href="forums/-/index.rss" rel="alternate" class="globalFeed" target="_blank"
+					title="RSS feed for The FreeBSD Forums">RSS</a></li>
+			
+			</ul>
+			
+			<span class="helper"></span>
+		</div>
+	</div>
+</div>
+
+<div class="footerLegal">
+	<div class="pageWidth">
+		<div class="pageContent">
+			<ul id="legal">
+			
+				<li><a href="/forums/forum-rules-and-guidelines-required-reading.49/">Terms and Rules</a></li>
+				
+			
+			</ul>
+			
+			<div id="copyright"><a href="https://xenforo.com" class="concealed">Forum software by XenForo&trade; <span>&copy;2010-2016 XenForo Ltd.</span></a> 
+			<br/>The mark FreeBSD is a registered trademark of The FreeBSD Foundation and is used by The FreeBSD Project with the permission of The FreeBSD Foundation.</div>
+			
+		
+			
+			
+			<span class="helper"></span>
+		</div>
+	</div>	
+</div>
+
+</footer>
+
+<script>
+
+
+jQuery.extend(true, XenForo,
+{
+	visitor: { user_id: 0 },
+	serverTimeInfo:
+	{
+		now: 1507059208,
+		today: 1506985200,
+		todayDow: 2
+	},
+	_lightBoxUniversal: "0",
+	_enableOverlays: "1",
+	_animationSpeedMultiplier: "1",
+	_overlayConfig:
+	{
+		top: "10%",
+		speed: 200,
+		closeSpeed: 100,
+		mask:
+		{
+			color: "rgb(255, 255, 255)",
+			opacity: "0.6",
+			loadSpeed: 200,
+			closeSpeed: 100
+		}
+	},
+	_ignoredUsers: [],
+	_loadedScripts: {"thread_view":true,"message":true,"bb_code":true,"message_user_info":true,"likes_summary":true,"freebsd_org_top_navigation_menu":true,"login_bar":true},
+	_cookieConfig: { path: "/", domain: "", prefix: "xf_"},
+	_csrfToken: "",
+	_csrfRefreshUrl: "login/csrf-token-refresh",
+	_jsVersion: "16052222",
+	_noRtnProtect: false,
+	_noSocialLogin: false
+});
+jQuery.extend(XenForo.phrases,
+{
+	cancel: "Cancel",
+
+	a_moment_ago:    "A moment ago",
+	one_minute_ago:  "1 minute ago",
+	x_minutes_ago:   "%minutes% minutes ago",
+	today_at_x:      "Today at %time%",
+	yesterday_at_x:  "Yesterday at %time%",
+	day_x_at_time_y: "%day% at %time%",
+
+	day0: "Sunday",
+	day1: "Monday",
+	day2: "Tuesday",
+	day3: "Wednesday",
+	day4: "Thursday",
+	day5: "Friday",
+	day6: "Saturday",
+
+	_months: "January,February,March,April,May,June,July,August,September,October,November,December",
+	_daysShort: "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
+
+	following_error_occurred: "The following error occurred",
+	server_did_not_respond_in_time_try_again: "The server did not respond in time. Please try again.",
+	logging_in: "Logging in",
+	click_image_show_full_size_version: "Click this image to show the full-size version.",
+	show_hidden_content_by_x: "Show hidden content by {names}"
+});
+
+// Facebook Javascript SDK
+XenForo.Facebook.appId = "";
+XenForo.Facebook.forceInit = false;
+
+
+</script>
+
+
+
+
+</body>
+</html>

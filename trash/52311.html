@@ -1,0 +1,3570 @@
+<!DOCTYPE html>
+<html id="XenForo" lang="en-US" dir="LTR" class="Public NoJs LoggedOut NoSidebar  Responsive" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	
+		<base href="https://forums.freebsd.org/" />
+		<script>
+			var _b = document.getElementsByTagName('base')[0], _bH = "https://forums.freebsd.org/";
+			if (_b && _b.href != _bH) _b.href = _bH;
+		</script>
+	
+
+	<title>HOWTO: Setup Xorg with NVIDIA&#039;s driver | The FreeBSD Forums</title>
+	
+	<noscript><style>.JsOnly, .jsOnly { display: none !important; }</style></noscript>
+	<link rel="stylesheet" href="css.php?css=xenforo,form,public&amp;style=3&amp;dir=LTR&amp;d=1494503601" />
+	<link rel="stylesheet" href="css.php?css=bb_code,freebsd_org_top_navigation_menu,likes_summary,login_bar,message,message_user_info,thread_view&amp;style=3&amp;dir=LTR&amp;d=1494503601" />
+	
+	
+
+	
+		<script src="js/jquery/jquery-1.11.0.min.js"></script>	
+		
+	<script src="js/xenforo/xenforo.js?_v=16052222"></script>
+
+	
+	<link rel="apple-touch-icon" href="https://forums.freebsd.org/styles/default/xenforo/logo.og.png" />
+	<link rel="alternate" type="application/rss+xml" title="RSS feed for The FreeBSD Forums" href="forums/-/index.rss" />
+	
+	
+	<link rel="canonical" href="https://forums.FreeBSD.org/threads/52311/" />
+	<meta name="description" content="If you are following the handbook on configuring Xorg, ignore what the handbook says about running Xorg -configure.
+ Don't run Xorg -configure
+ If you..." />	<meta property="og:site_name" content="The FreeBSD Forums" />
+	<meta property="og:image" content="https://forums.freebsd.org/styles/freebsd/xenforo/avatars/avatar_m.png" />
+	<meta property="og:image" content="https://forums.freebsd.org/styles/default/xenforo/logo.og.png" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://forums.FreeBSD.org/threads/52311/" />
+	<meta property="og:title" content="HOWTO: Setup Xorg with NVIDIA&#039;s driver" />
+	<meta property="og:description" content="If you are following the handbook on configuring Xorg, ignore what the handbook says about running Xorg -configure.
+ Don't run Xorg -configure
+ If you..." />
+	
+	
+	
+
+</head>
+
+<body class="node39 node23 SelectQuotable">
+
+
+
+
+
+
+<div id="freebsd_headercontainer">
+			<div id="freebsd_header">
+			  <div id="freebsd_headerlogoleft">
+			    <a title="FreeBSD" href="../">
+			      <img width="457" height="75" alt="FreeBSD" src="./styles/freebsd/xenforo/freebsd_logo.png">
+			    </a>
+			  </div>
+			  <div id="freebsd_headerlogoright">
+			    <div class="frontdonateroundbox">
+			      <div class="frontdonatetop">
+				<div>
+				  <b style="display: none;">.</b>
+				</div>
+			      </div>
+			      <div class="frontdonatecontent">
+				<a href="http://www.FreeBSDFoundation.org/donate/">Donate to FreeBSD</a>
+			      </div>
+			      <div class="frontdonatebot">
+				<div>
+				  <b style="display: none;">.</b>
+				</div>
+			      </div>
+			    </div>
+			    <!-- freebsd search removed here -->
+			  </div>
+                
+                <!--
+                          <div id="search-box">
+				<form action="./search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="text" maxlength="128" title="Search for keywords" class="inputbox search" value="Search…" onclick="if(this.value=='Search…')this.value='';" onblur="if(this.value=='')this.value='Search…';" />
+					<input class="button2" value="Search" type="submit" /><br />
+					<a href="./search.php" title="View the advanced search options">Advanced search</a> 
+				</fieldset>
+				</form>
+                              </div>
+                              -->
+		
+			</div>
+			<div id="freebsd_menu">
+			  <ul class="first">
+			    <li>
+			      <a href="http://www.freebsd.org/">Home</a>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/about.html">About</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/projects/newbies.html">Introduction</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/features.html">Features</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/advocacy/">Advocacy</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/marketing/">Marketing</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/privacy.html">Privacy Policy</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/where.html">Get FreeBSD</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/releases/">Release Information</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/releng/">Release Engineering</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/docs.html">Documentation</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/faq/">FAQ</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/">Handbook</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/porters-handbook">Porter's Handbook</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook">Developer's Handbook</a>
+				</li>
+				<li>
+				  <a href="http://www.FreeBSD.org/cgi/man.cgi">Manual Pages</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/fdp-primer">Documentation Project Primer</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/docs/books.html">All Books and Articles</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/community.html">Community</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/community/mailinglists.html">Mailing Lists</a>
+				</li>
+				<li>
+				  <a href="http://forums.freebsd.org">Forums</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/usergroups.html">User Groups</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/events/events.html">Events</a>
+				</li>
+				<li>
+				  <a href="http://serverfault.com/questions/tagged/freebsd">Q&amp;A (external)</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/projects/index.html">Developers</a>
+			      <ul>
+				<li>
+				  <a href="http://wiki.FreeBSD.org/IdeasPage">Project Ideas</a>
+				</li>
+				<li>
+				  <a href="http://svnweb.FreeBSD.org">SVN Repository</a>
+				</li>
+				<li>
+				  <a href="http://p4web.FreeBSD.org">Perforce Repository</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsd.org/support.html">Support</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsd.org/commercial/commercial.html">Vendors</a>
+				</li>
+				<li>
+				  <a href="http://security.FreeBSD.org/">Security Information</a>
+				</li>
+				<li>
+				  <a href="http://www.FreeBSD.org/cgi/query-pr-summary.cgi">Bug Reports</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/send-pr.html">Submit Bug-report</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			  <ul>
+			    <li>
+			      <a href="http://www.freebsdfoundation.org/">Foundation</a>
+			      <ul>
+				<li>
+				  <a href="http://www.freebsdfoundation.org/donate/">Monetary Donations</a>
+				</li>
+				<li>
+				  <a href="http://www.freebsd.org/donations/">Hardware Donations</a>
+				</li>
+			      </ul>
+			    </li>
+			  </ul>
+			</div>
+		      </div>
+
+
+	
+
+<div id="loginBar">
+	<div class="pageWidth">
+		<div class="pageContent">	
+			<h3 id="loginBarHandle">
+				<label for="LoginControl"><a href="login/" class="concealed noOutline">Log in or Sign up</a></label>
+			</h3>
+			
+			<span class="helper"></span>
+
+			
+		</div>
+	</div>
+</div>
+
+
+<div id="headerMover">
+	<div id="headerProxy"></div>
+
+<div id="content" class="thread_view">
+	<div class="pageWidth">
+		<div class="pageContent">
+			<!-- main content area -->
+			
+			
+			
+			
+						
+						
+						
+						
+						<div class="breadBoxTop ">
+							
+							
+
+<nav>
+	
+		
+			
+				
+			
+		
+			
+				
+			
+		
+	
+
+	<fieldset class="breadcrumb">
+		<a href="misc/quick-navigation-menu?selected=node-39" class="OverlayTrigger jumpMenuTrigger" data-cacheOverlay="true" title="Open quick navigation"><!--Jump to...--></a>
+			
+		<div class="boardTitle"><strong>The FreeBSD Forums</strong></div>
+		
+		<span class="crumbs">
+			
+			
+			
+				<span class="crust selectedTabCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+					<a href="https://forums.freebsd.org/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Forums</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="https://forums.freebsd.org/categories/23/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Miscellaneous</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="https://forums.freebsd.org/forums/39/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Howtos and FAQs (Moderated)</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav>
+						</div>
+						
+						
+						
+					
+						<!--[if lt IE 8]>
+							<p class="importantMessage">You are using an out of date browser. It  may not display this or other websites correctly.<br />You should upgrade or use an <a href="https://www.google.com/chrome/browser/" target="_blank">alternative browser</a>.</p>
+						<![endif]-->
+
+						
+						
+
+						
+						
+						
+						
+												
+							<!-- h1 title, description -->
+							<div class="titleBar">
+								
+								<h1>HOWTO: Setup Xorg with NVIDIA&#039;s driver</h1>
+								
+								<p id="pageDescription" class="muted ">
+	Discussion in '<a href="forums/39/">Howtos and FAQs (Moderated)</a>' started by <a href="members/17951/" class="username" dir="auto">tobik@</a>, <a href="threads/52311/"><span class="DateTime" title="Jul 11, 2015 at 7:45 AM">Jul 11, 2015</span></a>.
+</p>
+							</div>
+						
+						
+						
+						
+						
+						<!-- main template -->
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+<div class="pageNavLinkGroup">
+	<div class="linkGroup SelectionCountContainer">
+		
+		
+	</div>
+
+	
+</div>
+
+
+
+
+
+<form action="inline-mod/post/switch" method="post"
+	class="InlineModForm section"
+	data-cookieName="posts"
+	data-controls="#InlineModControls"
+	data-imodOptions="#ModerationSelect option">
+
+	<ol class="messageList" id="messageList">
+		
+			
+				
+
+
+<li id="post-293480" class="message   " data-author="tobik@">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/17951/" class="avatar Av17951m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_m.png" width="96" height="96" alt="tobik@" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/17951/" class="username" dir="auto" itemprop="name">tobik@</a>
+			<em class="userTitle" itemprop="title">Daemon</em>
+			<em class="userBanner bannerGreen wrapped" itemprop="title"><span class="before"></span><strong>Developer</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=17951" class="concealed" rel="nofollow">1,469</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>970</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<ol>
+<li> If you are following the handbook on <a href="https://www.freebsd.org/doc/handbook/x-config.html" target="_blank" class="externalLink" rel="nofollow">configuring Xorg</a>, ignore what the handbook says about running <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>Xorg -configure</kbd></code>.</li>
+<li> Don&#039;t run <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>Xorg -configure</kbd></code></li>
+<li> If you already followed the handbook and created an <tt style="color: #007a00;">xorg.conf</tt> make sure to remove <tt style="color: #007a00;">/etc/X11/xorg.conf</tt> or <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf</tt> before proceeding: <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>rm -f /etc/X11/xorg.conf /usr/local/etc/X11/xorg.conf</kbd></code></li>
+<li> Install <a target="_blank" title="x11/nvidia-driver port" href="http://www.freshports.org/x11/nvidia-driver"><u><tt style="color: #007a00;">x11/nvidia-driver</tt></u></a>: <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>pkg install x11/nvidia-driver</kbd></code><br />
+<br />
+For some older cards you need to use <a target="_blank" title="x11/nvidia-driver-340 port" href="http://www.freshports.org/x11/nvidia-driver-340"><u><tt style="color: #007a00;">x11/nvidia-driver-340</tt></u></a> or <a target="_blank" title="x11/nvidia-driver-304 port" href="http://www.freshports.org/x11/nvidia-driver-304"><u><tt style="color: #007a00;">x11/nvidia-driver-304</tt></u></a> instead.  Consult <a href="http://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" class="externalLink" rel="nofollow">NVIDIA&#039;s download page</a> to see which driver version you need.  Note that there is no need (and it&#039;s even counterproductive) to download the driver from that page.<br />
+</li>
+<li> Run <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>sysrc kld_list+=&quot;nvidia-modeset&quot;</kbd></code> to add an entry to <tt style="color: #007a00;">/etc/rc.conf</tt> to load the kernel modules at boot. <a target="_blank" title="The FreeBSD sysrc(8) manual page" href="https://www.freebsd.org/cgi/man.cgi?query=sysrc&sektion=8&manpath=freebsd-release-ports">sysrc(8)</a> is a nice utility that safely edits <tt style="color: #007a00;">/etc/rc.conf</tt> for you.<br />
+<br />
+<tt style="color: #007a00;">nvidia-modeset</tt> is only available for driver versions &gt;= 358.009, if you to use an older version use <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>sysrc kld_list+=&quot;nvidia&quot;</kbd></code> instead.</li>
+<li> Either reboot with <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>shutdown -r now</kbd></code> or load the required kernel modules now with <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>kldload nvidia-modeset</kbd></code> or <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>kldload nvidia</kbd></code></li>
+<li> Create the <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d</tt> directory:<br />
+<code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>mkdir -p /usr/local/etc/X11/xorg.conf.d</kbd></code></li>
+<li> Use your favourite editor to create <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d/driver-nvidia.conf</tt> with the following contents:<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+Section &quot;Device&quot;
+        Identifier &quot;NVIDIA Card&quot;
+        VendorName &quot;NVIDIA Corporation&quot;
+        Driver &quot;nvidia&quot;
+EndSection
+</pre></div></li>
+<li> At this point you can continue following the rest of the handbook on setting up a display manager and desktop environment.</li>
+</ol>
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Last edited: <span class="DateTime" title="Sep 22, 2017 at 12:27 PM">Sep 22, 2017</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/17951/" class="username author" dir="auto">tobik@</a>,</span>
+					<a href="threads/52311/" title="Permalink" class="datePermalink"><span class="DateTime" title="Jul 11, 2015 at 7:45 AM">Jul 11, 2015</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/293480/permalink">#1</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-293480">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="members/52159/" class="username" dir="auto">Preetpal</a>, <a href="members/44993/" class="username" dir="auto">EnioRM</a>, <a href="members/47099/" class="username" dir="auto">Phishfry</a> and <a href="posts/293480/likes" class="OverlayTrigger">16 others</a> thank for this.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-293521" class="message  staff " data-author="protocelt">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/37123/" class="avatar Av37123m" data-avatarhtml="true"><img src="data/avatars/m/37/37123.jpg?1413408004" width="96" height="96" alt="protocelt" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/37123/" class="username" dir="auto" itemprop="name">protocelt</a>
+			<em class="userTitle" itemprop="title">Moderator</em>
+			<em class="userBanner bannerStaff wrapped" itemprop="title"><span class="before"></span><strong>Staff Member</strong><span class="after"></span></em>
+<em class="userBanner bannerOrange wrapped" itemprop="title"><span class="before"></span><strong>Moderator</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=37123" class="concealed" rel="nofollow">1,257</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>398</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Thanks for this! Just want to add that the Linux compatibility option is on by default in the port so the <a target="_blank" title="The FreeBSD linux(4) manual page" href="https://www.freebsd.org/cgi/man.cgi?query=linux&sektion=4&manpath=freebsd-release-ports">linux(4)</a> kernel module needs to be loaded by adding <tt style="color: #007a00;">linux_load=&quot;YES&quot;</tt> to <tt style="color: #007a00;">/boot/loader.conf</tt>. I&#039;m not sure however if this is loaded at boot automatically as a dependent module when the Nvidia kernel driver is loaded or not. I always set up my environment before installing ports when installing FreeBSD. <img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie1" alt=":)" title="Smile    :)" /><br />
+<br />
+Edit: Just checked and <tt style="color: #007a00;">linux.ko</tt> is loaded automatically as a dependent module at boot but if installing <a target="_blank" title="x11/nvidia-driver port" href="http://www.freshports.org/x11/nvidia-driver"><u><tt style="color: #007a00;">x11/nvidia-driver</tt></u></a> from ports it will need to be loaded as a prerequisite to installing the port unless the Linux compatibility option is turned off.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside><span style="font-size: 12px"><b><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b>--</b></span></b></span></b></b></span><br />
+<b><span style="font-size: 12px"><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b><span style="font-size: 12px"><a href="https://forums.freebsd.org/forums/forum-rules-and-guidelines-required-reading.49/" class="internalLink"><span style="color: #000000">//</span> Forum Rules and Guidelines</a></span></b></span></b></span></b></span></b><br />
+<span style="font-size: 12px"><b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/40469/" class="internalLink"><b>Topics about FreeBSD <span style="text-decoration: underline">CURRENT</span></b></a><br />
+<b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/49535/" class="internalLink"><b>Post formatting guidelines</b></a></span></aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/37123/" class="username author" dir="auto">protocelt</a>,</span>
+					<a href="threads/52311/#post-293521" title="Permalink" class="datePermalink"><span class="DateTime" title="Jul 12, 2015 at 3:45 AM">Jul 12, 2015</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-293521" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/293521/permalink">#2</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-293521">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="members/36140/" class="username" dir="auto">priyadarshan</a>, <a href="members/45443/" class="username" dir="auto">Monti</a>, <a href="members/17951/" class="username" dir="auto">tobik@</a> and <a href="posts/293521/likes" class="OverlayTrigger">1 other person</a> thank for this.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-312833" class="message  staff " data-author="protocelt">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/37123/" class="avatar Av37123m" data-avatarhtml="true"><img src="data/avatars/m/37/37123.jpg?1413408004" width="96" height="96" alt="protocelt" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/37123/" class="username" dir="auto" itemprop="name">protocelt</a>
+			<em class="userTitle" itemprop="title">Moderator</em>
+			<em class="userBanner bannerStaff wrapped" itemprop="title"><span class="before"></span><strong>Staff Member</strong><span class="after"></span></em>
+<em class="userBanner bannerOrange wrapped" itemprop="title"><span class="before"></span><strong>Moderator</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=37123" class="concealed" rel="nofollow">1,257</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>398</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					For users having tearing problems when using compositing with Nvidia Kepler and newer based cards:<br />
+<br />
+From what I understand, starting with Nvidia&#039;s Kepler based GPUs, Nvidia removed the hardware support for tearing/Vsync in the GPU and added additions to control this in the driver instead. For many users of FreeBSD, Linux and even Windows in some cases, this does not prevent tearing very well if at all. Nvidia&#039;s answer to this is it&#039;s newer <a href="https://en.wikipedia.org/wiki/Nvidia_G-Sync" target="_blank" class="externalLink">G-Sync</a> technology built into some monitors and supported by <i>some</i> cards. If you do not have a card and monitor that supports G-Sync and have tearing issues, there is a workaround.<br />
+<br />
+Enabling the options <tt style="color: #007a00;">&quot;ForceFullCompositionPipeline&quot;</tt> and <tt style="color: #007a00;">&quot;TripleBuffer&quot;</tt> in the <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf/10-nvidia.conf</tt> file referenced above should fix the tearing issues. The drawback is a slight penalty in performance but for every day desktop use, this shouldn&#039;t really be noticed at all. It may be noticed more when playing games under FreeBSD, though YMMV. I didn&#039;t notice much of a difference at all myself in my limited testing.<br />
+<br />
+If you are following <a href="https://forums.freebsd.org/members/17951/" class="username" data-user="17951, tobik">tobik</a>&#039;s instructions above, your <tt style="color: #007a00;">10-nvidia.conf</tt> file would look similar to the following with these changes included:<br />
+<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>Section &quot;Device&quot;
+        Identifier     &quot;NVIDIA Card&quot;
+        VendorName     &quot;NVIDIA Corporation&quot;
+        Driver         &quot;nvidia&quot;
+        Option         &quot;AccelMethod&quot; &quot;none&quot;
+        Option         &quot;TripleBuffer&quot; &quot;True&quot;
+        Option         &quot;MetaModes&quot; &quot;nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }&quot;
+EndSection</pre></div><br />
+<br />
+I tested this using both compositing under KDE as well as <a target="_blank" title="x11-wm/compton port" href="http://www.freshports.org/x11-wm/compton"><u><tt style="color: #007a00;">x11-wm/compton</tt></u></a>.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside><span style="font-size: 12px"><b><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b>--</b></span></b></span></b></b></span><br />
+<b><span style="font-size: 12px"><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b><span style="font-size: 12px"><a href="https://forums.freebsd.org/forums/forum-rules-and-guidelines-required-reading.49/" class="internalLink"><span style="color: #000000">//</span> Forum Rules and Guidelines</a></span></b></span></b></span></b></span></b><br />
+<span style="font-size: 12px"><b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/40469/" class="internalLink"><b>Topics about FreeBSD <span style="text-decoration: underline">CURRENT</span></b></a><br />
+<b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/49535/" class="internalLink"><b>Post formatting guidelines</b></a></span></aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/37123/" class="username author" dir="auto">protocelt</a>,</span>
+					<a href="threads/52311/#post-312833" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 24, 2016 at 1:37 AM">Feb 24, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-312833" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/312833/permalink">#3</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-312833">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="members/36140/" class="username" dir="auto">priyadarshan</a>, <a href="members/9978/" class="username" dir="auto">nb</a>, <a href="members/42900/" class="username" dir="auto">robroy</a> and <a href="posts/312833/likes" class="OverlayTrigger">3 others</a> thank for this.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-312950" class="message   " data-author="dlegrand">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/45312/" class="avatar Av45312m" data-avatarhtml="true"><img src="data/avatars/m/45/45312.jpg?1488012176" width="96" height="96" alt="dlegrand" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/45312/" class="username" dir="auto" itemprop="name">dlegrand</a>
+			<em class="userTitle" itemprop="title">Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=45312" class="concealed" rel="nofollow">99</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>30</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="protocelt">
+	<aside>
+		
+			<div class="attribution type">protocelt said:
+				
+					<a href="goto/post?id=312833#post-312833" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">For users having tearing problems when using compositing with Nvidia Kepler and newer based cards:<br />
+<br />
+From what I understand, starting with Nvidia&#039;s Kepler based GPUs, Nvidia removed the hardware support for tearing/Vsync in the GPU and added additions to control this in the driver instead. For many users of FreeBSD, Linux and even Windows in some cases, this does not prevent tearing very well if at all. Nvidia&#039;s answer to this is it&#039;s newer <a href="https://en.wikipedia.org/wiki/Nvidia_G-Sync" target="_blank" class="externalLink" rel="nofollow">G-Sync</a> technology built into some monitors and supported by <i>some</i> cards. If you do not have a card and monitor that supports G-Sync and have tearing issues, there is a workaround.<br />
+<br />
+Enabling the options <tt style="color: #007a00;">&quot;ForceFullCompositionPipeline&quot;</tt> and <tt style="color: #007a00;">&quot;TripleBuffer&quot;</tt> in the <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf/10-nvidia.conf</tt> file referenced above should fix the tearing issues. The drawback is a slight penalty in performance but for every day desktop use, this shouldn&#039;t really be noticed at all. It may be noticed more when playing games under FreeBSD, though YMMV. I didn&#039;t notice much of a difference at all myself in my limited testing.<br />
+<br />
+If you are following <a href="https://forums.freebsd.org/members/17951/" class="username" data-user="17951, tobik">tobik</a>&#039;s instructions above, your <tt style="color: #007a00;">10-nvidia.conf</tt> file would look similar to the following with these changes included:<br />
+<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>Section &quot;Device&quot;
+        Identifier     &quot;NVIDIA Card&quot;
+        VendorName     &quot;NVIDIA Corporation&quot;
+        Driver         &quot;nvidia&quot;
+        Option         &quot;AccelMethod&quot; &quot;none&quot;
+        Option         &quot;TripleBuffer&quot; &quot;True&quot;
+        Option         &quot;MetaModes&quot; &quot;nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }&quot;
+EndSection</pre></div><br />
+<br />
+I tested this using both compositing under KDE as well as <a target="_blank" title="x11-wm/compton port" href="http://www.freshports.org/x11-wm/compton"><u><tt style="color: #007a00;">x11-wm/compton</tt></u></a>.</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>Hi,<br />
+<br />
+Thank you very much, I was looking for that trick for a long time !<br />
+<br />
+My video adapter is an Nvidia GT610 and tearing disappears with your instructions. But another problem appears : my mouse cursor disappears when it approach the top of the screen.<br />
+I am using FreeBSD 10.2-RELEASE-p9 and xorg-7.7_2 with fvwm-2.6.5_7.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/45312/" class="username author" dir="auto">dlegrand</a>,</span>
+					<a href="threads/52311/#post-312950" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 25, 2016 at 11:04 AM">Feb 25, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-312950" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/312950/permalink">#4</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-312950"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-312972" class="message  staff " data-author="protocelt">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/37123/" class="avatar Av37123m" data-avatarhtml="true"><img src="data/avatars/m/37/37123.jpg?1413408004" width="96" height="96" alt="protocelt" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/37123/" class="username" dir="auto" itemprop="name">protocelt</a>
+			<em class="userTitle" itemprop="title">Moderator</em>
+			<em class="userBanner bannerStaff wrapped" itemprop="title"><span class="before"></span><strong>Staff Member</strong><span class="after"></span></em>
+<em class="userBanner bannerOrange wrapped" itemprop="title"><span class="before"></span><strong>Moderator</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=37123" class="concealed" rel="nofollow">1,257</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>398</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="dlegrand">
+	<aside>
+		
+			<div class="attribution type">dlegrand said:
+				
+					<a href="goto/post?id=312950#post-312950" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">But another problem appears : my mouse cursor disappears when it approach the top of the screen.<br />
+I am using FreeBSD 10.2-RELEASE-p9 and xorg-7.7_2 with fvwm-2.6.5_7.</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>This issue is fixed in newer versions of the Nvidia driver which have not been pulled into the ports tree yet.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside><span style="font-size: 12px"><b><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b>--</b></span></b></span></b></b></span><br />
+<b><span style="font-size: 12px"><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b><span style="font-size: 12px"><a href="https://forums.freebsd.org/forums/forum-rules-and-guidelines-required-reading.49/" class="internalLink"><span style="color: #000000">//</span> Forum Rules and Guidelines</a></span></b></span></b></span></b></span></b><br />
+<span style="font-size: 12px"><b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/40469/" class="internalLink"><b>Topics about FreeBSD <span style="text-decoration: underline">CURRENT</span></b></a><br />
+<b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/49535/" class="internalLink"><b>Post formatting guidelines</b></a></span></aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/37123/" class="username author" dir="auto">protocelt</a>,</span>
+					<a href="threads/52311/#post-312972" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 25, 2016 at 2:18 PM">Feb 25, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-312972" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/312972/permalink">#5</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-312972"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-312984" class="message   " data-author="dlegrand">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/45312/" class="avatar Av45312m" data-avatarhtml="true"><img src="data/avatars/m/45/45312.jpg?1488012176" width="96" height="96" alt="dlegrand" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/45312/" class="username" dir="auto" itemprop="name">dlegrand</a>
+			<em class="userTitle" itemprop="title">Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=45312" class="concealed" rel="nofollow">99</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>30</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="protocelt">
+	<aside>
+		
+			<div class="attribution type">protocelt said:
+				
+					<a href="goto/post?id=312972#post-312972" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">This issue is fixed in newer versions of the Nvidia driver which have not been pulled into the ports tree yet.</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>Nice !
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/45312/" class="username author" dir="auto">dlegrand</a>,</span>
+					<a href="threads/52311/#post-312984" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 25, 2016 at 3:30 PM">Feb 25, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-312984" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/312984/permalink">#6</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-312984"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-313239" class="message   " data-author="bald_bohemian">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/48775/" class="avatar Av48775m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_male_m.png" width="96" height="96" alt="bald_bohemian" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/48775/" class="username" dir="auto" itemprop="name">bald_bohemian</a>
+			<em class="userTitle" itemprop="title">New Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=48775" class="concealed" rel="nofollow">14</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>0</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="tobik">
+	<aside>
+		
+			<div class="attribution type">tobik said:
+				
+					<a href="goto/post?id=293480#post-293480" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote"><ol>
+<li>If you are following the handbook on <a href="https://www.freebsd.org/doc/handbook/x-config.html" target="_blank" class="externalLink" rel="nofollow">configuring Xorg</a>, ignore what the handbook says about running <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>Xorg -configure</kbd></code>.</li>
+<li>Don&#039;t run <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>Xorg -configure</kbd></code></li>
+<li>If you already followed the handbook and created an <tt style="color: #007a00;">xorg.conf</tt> make sure to remove <tt style="color: #007a00;">/etc/X11/xorg.conf</tt> or <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf</tt> before proceeding: <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>rm -f /etc/X11/xorg.conf /usr/local/etc/X11/xorg.conf</kbd></code></li>
+<li>Install <a target="_blank" title="x11/nvidia-driver port" href="http://www.freshports.org/x11/nvidia-driver"><u><tt style="color: #007a00;">x11/nvidia-driver</tt></u></a>: <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>pkg install x11/nvidia-driver</kbd></code><br />
+<br />
+For some older cards you need to use <a target="_blank" title="x11/nvidia-driver-340 port" href="http://www.freshports.org/x11/nvidia-driver-340"><u><tt style="color: #007a00;">x11/nvidia-driver-340</tt></u></a> or <a target="_blank" title="x11/nvidia-driver-304 port" href="http://www.freshports.org/x11/nvidia-driver-304"><u><tt style="color: #007a00;">x11/nvidia-driver-304</tt></u></a> instead.  Consult <a href="http://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" class="externalLink" rel="nofollow">NVIDIA&#039;s download page</a> to see which driver version you need.  Note that there is no need (and it&#039;s even counterproductive) to download the driver from that page.<br />
+</li>
+<li>Run <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>sysrc kld_list+=nvidia</kbd></code> to add an entry to <tt style="color: #007a00;">/etc/rc.conf</tt> to load the kernel module at boot. <a target="_blank" title="The FreeBSD sysrc(8) manual page" href="https://www.freebsd.org/cgi/man.cgi?query=sysrc&sektion=8&manpath=freebsd-release-ports">sysrc(8)</a> is a nice utility that safely edits <tt style="color: #007a00;">/etc/rc.conf</tt> for you. Alternatively, if you like that better you can add <tt style="color: #007a00;">nvidia_load=&quot;YES&quot;</tt> to <tt style="color: #007a00;">/boot/loader.conf</tt></li>
+<li>Either reboot with <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>shutdown -r now</kbd></code> or load the kernel module with <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>kldload nvidia</kbd></code></li>
+<li>Create the <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d</tt> directory:<br />
+<code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>mkdir -p /usr/local/etc/X11/xorg.conf.d</kbd></code></li>
+<li>Use your favourite editor to create <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d/10-nvidia.conf</tt> with the following contents:<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+Section &quot;Device&quot;
+        Identifier &quot;NVIDIA Card&quot;
+        VendorName &quot;NVIDIA Corporation&quot;
+        Driver &quot;nvidia&quot;
+EndSection
+</pre></div></li>
+<li>At this point you can continue following the rest of the handbook on setting up a display manager and desktop environment.</li>
+</ol></div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>I tried going to this page to find out which version of the driver I should use.  The only information I was able to find is that I would need version 361.28. Is there a way to translate this version number to whether I need the 330, 304 or regular nvidia-driver?  Thank you
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside>&quot;Criticism is something you can avoid easily by saying nothing, doing nothing, and being nothing&quot;<br />
+  - Aristotle</aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/48775/" class="username author" dir="auto">bald_bohemian</a>,</span>
+					<a href="threads/52311/#post-313239" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 28, 2016 at 5:58 PM">Feb 28, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-313239" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/313239/permalink">#7</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-313239"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-313242" class="message   " data-author="tobik@">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/17951/" class="avatar Av17951m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_m.png" width="96" height="96" alt="tobik@" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/17951/" class="username" dir="auto" itemprop="name">tobik@</a>
+			<em class="userTitle" itemprop="title">Daemon</em>
+			<em class="userBanner bannerGreen wrapped" itemprop="title"><span class="before"></span><strong>Developer</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=17951" class="concealed" rel="nofollow">1,469</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>970</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="bald_bohemian">
+	<aside>
+		
+			<div class="attribution type">bald_bohemian said:
+				
+					<a href="goto/post?id=313239#post-313239" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">I tried going to this page to find out which version of the driver I should use.  The only information I was able to find is that I would need version 361.28. Is there a way to translate this version number to whether I need the 330, 304 or regular nvidia-driver?  Thank you</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>There&#039;s no port for that version yet AFAICT <img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie3" alt=":(" title="Frown    :(" /> The version numbers should correspond with the port versions.<br />
+<br />
+What GPU do you have?
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/17951/" class="username author" dir="auto">tobik@</a>,</span>
+					<a href="threads/52311/#post-313242" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 28, 2016 at 6:04 PM">Feb 28, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-313242" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/313242/permalink">#8</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-313242"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-313247" class="message   " data-author="bald_bohemian">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/48775/" class="avatar Av48775m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_male_m.png" width="96" height="96" alt="bald_bohemian" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/48775/" class="username" dir="auto" itemprop="name">bald_bohemian</a>
+			<em class="userTitle" itemprop="title">New Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=48775" class="concealed" rel="nofollow">14</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>0</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					I have the Nvidia GF108 [GeForce GT 430]
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside>&quot;Criticism is something you can avoid easily by saying nothing, doing nothing, and being nothing&quot;<br />
+  - Aristotle</aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/48775/" class="username author" dir="auto">bald_bohemian</a>,</span>
+					<a href="threads/52311/#post-313247" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 28, 2016 at 6:58 PM">Feb 28, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-313247" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/313247/permalink">#9</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-313247"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-313249" class="message   " data-author="tobik@">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/17951/" class="avatar Av17951m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_m.png" width="96" height="96" alt="tobik@" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/17951/" class="username" dir="auto" itemprop="name">tobik@</a>
+			<em class="userTitle" itemprop="title">Daemon</em>
+			<em class="userBanner bannerGreen wrapped" itemprop="title"><span class="before"></span><strong>Developer</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=17951" class="concealed" rel="nofollow">1,469</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>970</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="bald_bohemian">
+	<aside>
+		
+			<div class="attribution type">bald_bohemian said:
+				
+					<a href="goto/post?id=313247#post-313247" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">I have the Nvidia GF108 [GeForce GT 430]</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>In that case you should be fine with just using <a target="_blank" title="x11/nvidia-driver port" href="http://www.freshports.org/x11/nvidia-driver"><u><tt style="color: #007a00;">x11/nvidia-driver</tt></u></a> (see <a href="http://us.download.nvidia.com/XFree86/FreeBSD-x86_64/346.96/README/supportedchips.html" target="_blank" class="externalLink" rel="nofollow">http://us.download.nvidia.com/XFree86/FreeBSD-x86_64/346.96/README/supportedchips.html</a>)
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/17951/" class="username author" dir="auto">tobik@</a>,</span>
+					<a href="threads/52311/#post-313249" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 28, 2016 at 7:05 PM">Feb 28, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-313249" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/313249/permalink">#10</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-313249"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-313250" class="message   " data-author="bald_bohemian">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/48775/" class="avatar Av48775m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_male_m.png" width="96" height="96" alt="bald_bohemian" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/48775/" class="username" dir="auto" itemprop="name">bald_bohemian</a>
+			<em class="userTitle" itemprop="title">New Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=48775" class="concealed" rel="nofollow">14</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>0</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="tobik">
+	<aside>
+		
+			<div class="attribution type">tobik said:
+				
+					<a href="goto/post?id=313249#post-313249" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">In that case you should be fine with just using <a target="_blank" title="x11/nvidia-driver port" href="http://www.freshports.org/x11/nvidia-driver"><u><tt style="color: #007a00;">x11/nvidia-driver</tt></u></a> (see <a href="http://us.download.nvidia.com/XFree86/FreeBSD-x86_64/346.96/README/supportedchips.html" target="_blank" class="externalLink" rel="nofollow">http://us.download.nvidia.com/XFree86/FreeBSD-x86_64/346.96/README/supportedchips.html</a>)</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>Thank you!
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside>&quot;Criticism is something you can avoid easily by saying nothing, doing nothing, and being nothing&quot;<br />
+  - Aristotle</aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/48775/" class="username author" dir="auto">bald_bohemian</a>,</span>
+					<a href="threads/52311/#post-313250" title="Permalink" class="datePermalink"><span class="DateTime" title="Feb 28, 2016 at 7:06 PM">Feb 28, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-313250" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/313250/permalink">#11</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-313250"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-314579" class="message  staff " data-author="protocelt">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/37123/" class="avatar Av37123m" data-avatarhtml="true"><img src="data/avatars/m/37/37123.jpg?1413408004" width="96" height="96" alt="protocelt" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/37123/" class="username" dir="auto" itemprop="name">protocelt</a>
+			<em class="userTitle" itemprop="title">Moderator</em>
+			<em class="userBanner bannerStaff wrapped" itemprop="title"><span class="before"></span><strong>Staff Member</strong><span class="after"></span></em>
+<em class="userBanner bannerOrange wrapped" itemprop="title"><span class="before"></span><strong>Moderator</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=37123" class="concealed" rel="nofollow">1,257</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>398</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					For users that are having problems or have questions about Xorg and Nvidia GPUs, please create a new thread for your question in a support forum that would be more appropriate.<br />
+<br />
+If you have a question directly related to this Howto/FAQ, or have something to add to it, you are always still welcome to post it to this thread. <br />
+<br />
+Thanks!
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+			
+				<div class="baseHtml signature messageText ugc"><aside><span style="font-size: 12px"><b><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b>--</b></span></b></span></b></b></span><br />
+<b><span style="font-size: 12px"><b><span style="font-size: 15px"><b><span style="font-size: 15px"><b><span style="font-size: 12px"><a href="https://forums.freebsd.org/forums/forum-rules-and-guidelines-required-reading.49/" class="internalLink"><span style="color: #000000">//</span> Forum Rules and Guidelines</a></span></b></span></b></span></b></span></b><br />
+<span style="font-size: 12px"><b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/40469/" class="internalLink"><b>Topics about FreeBSD <span style="text-decoration: underline">CURRENT</span></b></a><br />
+<b><span style="color: #000000">//</span></b> <a href="https://forums.freebsd.org/threads/49535/" class="internalLink"><b>Post formatting guidelines</b></a></span></aside></div>
+			
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/37123/" class="username author" dir="auto">protocelt</a>,</span>
+					<a href="threads/52311/#post-314579" title="Permalink" class="datePermalink"><span class="DateTime" title="Mar 13, 2016 at 1:47 PM">Mar 13, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-314579" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/314579/permalink">#12</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-314579"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-318536" class="message   " data-author="tobik@">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/17951/" class="avatar Av17951m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_m.png" width="96" height="96" alt="tobik@" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/17951/" class="username" dir="auto" itemprop="name">tobik@</a>
+			<em class="userTitle" itemprop="title">Daemon</em>
+			<em class="userBanner bannerGreen wrapped" itemprop="title"><span class="before"></span><strong>Developer</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=17951" class="concealed" rel="nofollow">1,469</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>970</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					A quick note for those who want to build <a target="_blank" title="x11/nvidia-driver port" href="http://www.freshports.org/x11/nvidia-driver"><u><tt style="color: #007a00;">x11/nvidia-driver</tt></u></a> or related ports themselves.<br />
+Make sure you have the correct source tree in <tt style="color: #007a00;">/usr/src</tt>. Errors like<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+make[2]: &quot;/usr/share/mk/bsd.kmod.mk&quot; line 12: Unable to locate the kernel source tree. Set SYSDIR to override
+*** Error code 1
+</pre></div> during building or <div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+KLD nvidia:ko: depends on kernel - not available or version mismatch
+linker_load_file: Unsupported file type
+</pre></div> when loading the driver are strong hints that you have either no sources or the wrong sources installed.<br />
+<br />
+For FreeBSD 10.3-RELEASE you can fetch the correct tree via <b>one</b> of these two methods:<br />
+<ol>
+<li> <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>svnlite checkout https://svn.freebsd.org/base/releng/10.3 /usr/src</kbd></code></li>
+<li> Or grab and extract the <tt style="color: #007a00;">src.txz</tt> tarball (it&#039;s the one you can select in the installer as well):<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+fetch https://download.freebsd.org/ftp/releases/amd64/10.3-RELEASE/src.txz
+tar -C / -xf src.txz
+</pre></div> Starting an update with <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>freebsd-update fetch</kbd></code> and <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>freebsd-update install</kbd></code> is recommend even if you&#039;ve already updated previously. <code style="background-color: #dee3e7; padding: .2px; margin: .1em; display: inline-block;"> <kbd>freebsd-update</kbd></code> will make sure that the sources match the most recent patch level.</li>
+</ol>
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Last edited: <span class="DateTime" title="May 2, 2016 at 4:56 PM">May 2, 2016</span>
+			
+			</div>
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/17951/" class="username author" dir="auto">tobik@</a>,</span>
+					<a href="threads/52311/#post-318536" title="Permalink" class="datePermalink"><span class="DateTime" title="Apr 27, 2016 at 12:30 AM">Apr 27, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-318536" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/318536/permalink">#13</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-318536"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-325927" class="message   " data-author="ILUXA">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/48958/" class="avatar Av48958m" data-avatarhtml="true"><img src="data/avatars/m/48/48958.jpg?1506954641" width="96" height="96" alt="ILUXA" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/48958/" class="username" dir="auto" itemprop="name">ILUXA</a>
+			<em class="userTitle" itemprop="title">Active Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=48958" class="concealed" rel="nofollow">242</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>116</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="protocelt">
+	<aside>
+		
+			<div class="attribution type">protocelt said:
+				
+					<a href="goto/post?id=312833#post-312833" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">For users having tearing problems when using compositing with Nvidia Kepler and newer based cards:<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>  Option  &quot;MetaModes&quot; &quot;nvidia-auto-select +0+0 { <b>ForceFullCompositionPipeline</b> = On }&quot;
+</pre></div></div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>&quot;ForceCompositionPipeline&quot; works better for me (GeForce 9 Series).<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+Option         &quot;metamodes&quot; &quot;1280x1024 +0+0 { <b>ForceCompositionPipeline</b> = On }&quot;</pre></div> <br />
+I&#039;m using it in &quot;Screen&quot; section in <span style="color: green">/etc/X11/xorg.conf</span><br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+Section &quot;Screen&quot;
+    Identifier     &quot;Screen0&quot;
+    Device         &quot;Device0&quot;
+    Monitor        &quot;Monitor0&quot;
+    DefaultDepth    24
+    Option         &quot;metamodes&quot; &quot;1280x1024 +0+0 { ForceCompositionPipeline = On }&quot;
+    SubSection     &quot;Display&quot;
+        Depth       24
+    EndSubSection
+EndSection
+</pre></div> 
+
+
+<div class="bbCodeBlock bbCodeQuote" data-author="http://http.download.nvidia.com/XFree86/FreeBSD-x86_64/340.96/README/configtwinview.html">
+	<aside>
+		
+			<div class="attribution type">http://http.download.nvidia.com/XFree86/FreeBSD-x86_64/340.96/README/configtwinview.html said:
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">⚫ &quot;ForceCompositionPipeline&quot;: possible values are &quot;On&quot; or &quot;Off&quot;. The NVIDIA X driver can use a composition pipeline to apply X screen transformations and rotations. &quot;ForceCompositionPipeline&quot; can be used to force the use of this pipeline, even when no transformations or rotations are applied to the screen.<br />
+<br />
+⚫ &quot;ForceFullCompositionPipeline&quot;: possible values are &quot;On&quot; or &quot;Off&quot;. This option implicitly enables &quot;ForceCompositionPipeline&quot; and additionally makes use of the composition pipeline to apply ViewPortOut scaling.</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>Also it is possible to start your WM (window manager) with right resolution with this fix via <tt style="color: #007a00;">~/.xinitrc</tt>:<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>
+#!/bin/sh
+<span style="text-decoration: underline">nvidia-settings --assign CurrentMetaMode=&quot;1280x1024 +0+0 { ForceCompositionPipeline = On }&quot;</span>
+exec /usr/local/bin/wmaker
+</pre></div><br />
+(<a target="_blank" title="x11/nvidia-settings port" href="http://www.freshports.org/x11/nvidia-settings"><u><tt style="color: #007a00;">x11/nvidia-settings</tt></u></a> should be installed).
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/48958/" class="username author" dir="auto">ILUXA</a>,</span>
+					<a href="threads/52311/#post-325927" title="Permalink" class="datePermalink"><span class="DateTime" title="Aug 6, 2016 at 8:59 AM">Aug 6, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-325927" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/325927/permalink">#14</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-325927">
+	
+	<div class="likesSummary secondaryContent">
+		<span class="LikeText">
+			<a href="members/52052/" class="username" dir="auto">hrenznaet</a>, <a href="members/15802/" class="username" dir="auto">free-and-bsd</a> and <a href="members/45312/" class="username" dir="auto">dlegrand</a> thank for this.
+		</span>
+	</div>
+</div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-326134" class="message   " data-author="free-and-bsd">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/15802/" class="avatar Av15802m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_m.png" width="96" height="96" alt="free-and-bsd" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/15802/" class="username" dir="auto" itemprop="name">free-and-bsd</a>
+			<em class="userTitle" itemprop="title">Aspiring Daemon</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=15802" class="concealed" rel="nofollow">562</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>63</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Interesting!<br />
+I have two computers with (older) NVIDIA cards, both run 11.0-CURRENT, and neither ever needed ANY <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d/*.conf</tt> file to explicitly inform my system to use NVIDIA driver.<br />
+<br />
+However, what I <i>did</i> need was to instruct <tt style="color: #007a00;">Xorg</tt> how to handle my dual monitors the way I needed it. The problem was, while using one screen for 2 monitors it would always put them in the &quot;wrong&quot; order -- and me not being able to physically swap them for certain reasons. So, instead of physically swapping them I figured out the far more gracious <img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie2" alt=";)" title="Wink    ;)" /> way to do that.<br />
+<br />
+DON&#039;T use any <tt style="color: #007a00;">nvidia-settings</tt> or <tt style="color: #007a00;">nvidia-xconfig</tt> or any such stuff. They are WAY too complicated for this simple task! Both will create huge and overly complicated <tt style="color: #007a00;">xorg.conf</tt> file stuffed with specific nvidia-related options and settings you don&#039;t really need for a simple task of using 2 monitors with default driver-decided settings in the <i>needed</i> order.<br />
+<br />
+It just took me to put a simple <tt style="color: #007a00;">twin.conf</tt> file into <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d</tt>:<br />
+<div class="bbCodeBlock bbCodeCode"><div class="type">Code:</div><pre>Section &quot;ServerLayout&quot;
+  Identifier &quot;myLayout&quot;
+  Screen 0   &quot;myScreen&quot; 0 0
+EndSection
+
+Section &quot;Device&quot;
+  Identifier   &quot;Card0&quot;
+  Driver   &quot;nvidia&quot;
+  VendorName   &quot;NVIDIA Corporation&quot;
+EndSection
+
+Section &quot;Screen&quot;
+Identifier  &quot;myScreen&quot;
+  Device  &quot;Card0&quot;
+  Option   &quot;MetaModes&quot;   &quot;DFP-1:nvidia-auto-select,DFP-0:nvidia-auto-select&quot;
+  Option   &quot;MetaModeOrientation&quot;   &quot;DFP-1 LeftOf DFP-0&quot;
+EndSection</pre></div><br />
+I&#039;ve taken the exact data (DFP-1 and such) from <tt style="color: #007a00;">/var/log/Xorg.0.log</tt>, BTW. It clearly reports there whether it is using configuration from <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d</tt> or not, and why not. So it wouldn&#039;t use anything defined in &quot;Screen&quot; section alone unless a &quot;Device&quot; section be present as well. But with monitors and input devices it seems quite safe to stay with defaults.<br />
+<br />
+I&#039;m putting this here partly because this is just as simple as they come, while whatever I&#039;ve found on the web was far more complicated (even at the very helpful <a href="https://wiki.archlinux.org/index.php/NVIDIA" target="_blank" class="externalLink" rel="nofollow">Arch Wiki page</a>).
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/15802/" class="username author" dir="auto">free-and-bsd</a>,</span>
+					<a href="threads/52311/#post-326134" title="Permalink" class="datePermalink"><span class="DateTime" title="Aug 8, 2016 at 8:45 PM">Aug 8, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-326134" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/326134/permalink">#15</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-326134"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-336071" class="message   " data-author="beans10001">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/45799/" class="avatar Av45799m" data-avatarhtml="true"><img src="data/avatars/m/45/45799.jpg?1430234710" width="96" height="96" alt="beans10001" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/45799/" class="username" dir="auto" itemprop="name">beans10001</a>
+			<em class="userTitle" itemprop="title">New Member</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=45799" class="concealed" rel="nofollow">7</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>0</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					I was struggling to get Xorg <a href="https://forums.freebsd.org/threads/58750/" class="internalLink">working on a late-2013 iMac</a> and this thread did the trick. Many thanks!!
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/45799/" class="username author" dir="auto">beans10001</a>,</span>
+					<a href="threads/52311/#post-336071" title="Permalink" class="datePermalink"><span class="DateTime" title="Nov 29, 2016 at 4:24 PM">Nov 29, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-336071" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/336071/permalink">#16</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-336071"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-336148" class="message   " data-author="free-and-bsd">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/15802/" class="avatar Av15802m" data-avatarhtml="true"><img src="styles/freebsd/xenforo/avatars/avatar_m.png" width="96" height="96" alt="free-and-bsd" /></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/15802/" class="username" dir="auto" itemprop="name">free-and-bsd</a>
+			<em class="userTitle" itemprop="title">Aspiring Daemon</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Messages:</dt>
+						<dd><a href="search/member?user_id=15802" class="concealed" rel="nofollow">562</a></dd>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Thanks Received:</dt>
+						<dd>63</dd>
+					</dl>
+				
+				
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="free-and-bsd">
+	<aside>
+		
+			<div class="attribution type">free-and-bsd said:
+				
+					<a href="goto/post?id=326134#post-326134" class="AttributionLink">&uarr;</a>
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">...and neither ever needed ANY <tt style="color: #007a00;">/usr/local/etc/X11/xorg.conf.d/*.conf</tt> file to explicitly inform my system to use NVIDIA driver...</div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>Well, with the latest <tt style="color: #007a00;">nvidia-driver</tt> I actually <i>had</i> to as it doesn&#039;t seem to work without one.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/15802/" class="username author" dir="auto">free-and-bsd</a>,</span>
+					<a href="threads/52311/#post-336148" title="Permalink" class="datePermalink"><span class="DateTime" title="Nov 30, 2016 at 10:14 AM">Nov 30, 2016</span></a>
+				</span>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/52311/#post-336148" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/336148/permalink">#17</a>
+				
+				
+				
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-336148"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+		
+	</ol>
+
+	
+
+	<input type="hidden" name="_xfToken" value="" />
+
+</form>
+
+	<div class="pageNavLinkGroup">
+			
+				<div class="linkGroup">
+					
+						<label for="LoginControl"><a href="login/" class="concealed element">(You must log in or sign up to reply here.)</a></label>
+					
+				</div>
+			
+			<div class="linkGroup" style="display: none"><a href="javascript:" class="muted JsOnly DisplayIgnoredContent Tooltip" title="Show hidden content by ">Show Ignored Content</a></div>
+
+			
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+						
+						
+						
+						
+							<!-- login form, to be moved to the upper drop-down -->
+							
+
+
+
+
+
+
+
+<form action="login/login" method="post" class="xenForm " id="login" style="display:none">
+
+	
+
+	<div class="ctrlWrapper">
+		<dl class="ctrlUnit">
+			<dt><label for="LoginControl">Your name or email address:</label></dt>
+			<dd><input type="text" name="login" id="LoginControl" class="textCtrl" tabindex="101" /></dd>
+		</dl>
+	
+	
+		<dl class="ctrlUnit">
+			<dt>
+				<label for="ctrl_password">Do you already have an account?</label>
+			</dt>
+			<dd>
+				<ul>
+					<li><label for="ctrl_not_registered"><input type="radio" name="register" value="1" id="ctrl_not_registered" tabindex="105" />
+						No, create an account now.</label></li>
+					<li><label for="ctrl_registered"><input type="radio" name="register" value="0" id="ctrl_registered" tabindex="105" checked="checked" class="Disabler" />
+						Yes, my password is:</label></li>
+					<li id="ctrl_registered_Disabler">
+						<input type="password" name="password" class="textCtrl" id="ctrl_password" tabindex="102" />
+						<div class="lostPassword"><a href="lost-password/" class="OverlayTrigger OverlayCloser" tabindex="106">Forgot your password?</a></div>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+	
+		
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" class="button primary" value="Log in" tabindex="104" data-loginPhrase="Log in" data-signupPhrase="Sign up" />
+				<label for="ctrl_remember" class="rememberPassword"><input type="checkbox" name="remember" value="1" id="ctrl_remember" tabindex="103" /> Stay logged in</label>
+			</dd>
+		</dl>
+	</div>
+
+	<input type="hidden" name="cookie_check" value="1" />
+	<input type="hidden" name="redirect" value="/threads/52311/" />
+	<input type="hidden" name="_xfToken" value="" />
+
+</form>
+						
+						
+					
+			
+						
+			<div class="breadBoxBottom">
+
+<nav>
+	
+
+	<fieldset class="breadcrumb">
+		<a href="misc/quick-navigation-menu?selected=node-39" class="OverlayTrigger jumpMenuTrigger" data-cacheOverlay="true" title="Open quick navigation"><!--Jump to...--></a>
+			
+		<div class="boardTitle"><strong>The FreeBSD Forums</strong></div>
+		
+		<span class="crumbs">
+			
+			
+			
+				<span class="crust selectedTabCrumb">
+					<a href="https://forums.freebsd.org/" class="crumb"><span>Forums</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust">
+						<a href="https://forums.freebsd.org/categories/23/" class="crumb"><span>Miscellaneous</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust">
+						<a href="https://forums.freebsd.org/forums/39/" class="crumb"><span>Howtos and FAQs (Moderated)</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav></div>
+			
+						
+			
+						
+		</div>
+	</div>
+</div>
+
+<header>
+	
+
+
+<div id="header">
+	<div id="logoBlock">
+	<div class="pageWidth">
+		<div class="pageContent">
+			
+			
+			<div id="logo"><a href="https://forums.freebsd.org/">
+				<span></span>
+				<!-- <img src="styles/default/xenforo/logo.png" alt="The FreeBSD Forums" /> -->
+			</a></div>
+			
+			<span class="helper"></span>
+		</div>
+	</div>
+</div>
+	
+
+<div id="navigation" class="pageWidth withSearch">
+	<div class="pageContent">
+		<nav>
+
+<div class="navTabs">
+	<ul class="publicTabs">
+	
+		<!-- home -->
+		
+		
+		
+		<!-- extra tabs: home -->
+		
+		
+		
+		<!-- forums -->
+		
+			<li class="navTab forums selected">
+			
+				<a href="https://forums.freebsd.org/" class="navLink">Forums</a>
+				<a href="https://forums.freebsd.org/" class="SplitCtrl" rel="Menu"></a>
+				
+				<div class="tabLinks forumsTabLinks">
+					<div class="primaryContent menuHeader">
+						<h3>Forums</h3>
+						<div class="muted">Quick Links</div>
+					</div>
+					<ul class="secondaryContent blockLinksList">
+					
+						
+						<li><a href="search/?type=post">Search Forums</a></li>
+						
+						<li><a href="find-new/posts" rel="nofollow">Recent Posts</a></li>
+					
+					</ul>
+				</div>
+			</li>
+		
+		
+		
+		<!-- extra tabs: middle -->
+		
+		
+		
+		<!-- members -->
+						
+		
+		<!-- extra tabs: end -->
+		
+
+		<!-- responsive popup -->
+		<li class="navTab navigationHiddenTabs Popup PopupControl PopupClosed" style="display:none">	
+						
+			<a rel="Menu" class="navLink NoPopupGadget"><span class="menuIcon">Menu</span></a>
+			
+			<div class="Menu JsOnly blockLinksList primaryContent" id="NavigationHiddenMenu"></div>
+		</li>
+			
+		
+		<!-- no selection -->
+		
+		
+	</ul>
+	
+	
+</div>
+
+<span class="helper"></span>
+			
+		</nav>	
+	</div>
+</div>
+	
+
+<div id="searchBar" class="pageWidth">
+	
+	<span id="QuickSearchPlaceholder" title="Search">Search</span>
+	<fieldset id="QuickSearch">
+		<form action="search/search" method="post" class="formPopup">
+			
+			<div class="primaryControls">
+				<!-- block: primaryControls -->
+				<input type="search" name="keywords" value="" class="textCtrl" placeholder="Search..." title="Enter your search and hit enter" id="QuickSearchQuery" />				
+				<!-- end block: primaryControls -->
+			</div>
+			
+			<div class="secondaryControls">
+				<div class="controlsWrapper">
+				
+					<!-- block: secondaryControls -->
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+							<li><label><input type="checkbox" name="title_only" value="1"
+								id="search_bar_title_only" class="AutoChecker"
+								data-uncheck="#search_bar_thread" /> Search titles only</label></li>
+						</ul></dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_users">Posted by Member:</label></dt>
+						<dd>
+							<input type="text" name="users" value="" class="textCtrl AutoComplete" id="searchBar_users" />
+							<p class="explain">Separate names with a comma.</p>
+						</dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_date">Newer Than:</label></dt>
+						<dd><input type="date" name="date" value="" class="textCtrl" id="searchBar_date" /></dd>
+					</dl>
+					
+					
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+								
+									<li><label title="Search only HOWTO: Setup Xorg with NVIDIA&#039;s driver"><input type="checkbox" name="type[post][thread_id]" value="52311"
+	id="search_bar_thread" class="AutoChecker"
+	data-uncheck="#search_bar_title_only, #search_bar_nodes" /> Search this thread only</label></li>
+								
+									<li><label title="Search only Howtos and FAQs (Moderated)"><input type="checkbox" name="nodes[]" value="39"
+	id="search_bar_nodes" class="Disabler AutoChecker" checked="checked"
+	data-uncheck="#search_bar_thread" /> Search this forum only</label>
+	<ul id="search_bar_nodes_Disabler">
+		<li><label><input type="checkbox" name="type[post][group_discussion]" value="1"
+			id="search_bar_group_discussion" class="AutoChecker"
+			data-uncheck="#search_bar_thread" /> Display results as threads</label></li>
+	</ul></li>
+								
+						</ul></dd>
+					</dl>
+					
+				</div>
+				<!-- end block: secondaryControls -->
+				
+				<dl class="ctrlUnit submitUnit">
+					<dt></dt>
+					<dd>
+						<input type="submit" value="Search" class="button primary Tooltip" title="Find Now" />
+						<div class="Popup" id="commonSearches">
+							<a rel="Menu" class="button NoPopupGadget Tooltip" title="Useful Searches" data-tipclass="flipped"><span class="arrowWidget"></span></a>
+							<div class="Menu">
+								<div class="primaryContent menuHeader">
+									<h3>Useful Searches</h3>
+								</div>
+								<ul class="secondaryContent blockLinksList">
+									<!-- block: useful_searches -->
+									<li><a href="find-new/posts?recent=1" rel="nofollow">Recent Posts</a></li>
+									
+									<!-- end block: useful_searches -->
+								</ul>
+							</div>
+						</div>
+						<a href="search/" class="button moreOptions Tooltip" title="Advanced Search">More...</a>
+					</dd>
+				</dl>
+				
+			</div>
+			
+			<input type="hidden" name="_xfToken" value="" />
+		</form>		
+	</fieldset>
+	
+</div>
+</div>
+
+	
+	
+</header>
+
+</div>
+
+<footer>
+	
+
+
+<div class="footer">
+	<div class="pageWidth">
+		<div class="pageContent">
+			
+			<dl class="choosers">
+				
+					<dt>Style</dt>
+					<dd><a href="misc/style?redirect=%2Fthreads%2F52311%2F" class="OverlayTrigger Tooltip" title="Style Chooser" rel="nofollow">FreeBSD Style</a></dd>
+				
+				
+			</dl>
+			
+			
+			<ul class="footerLinks">
+			
+				
+					<li><a href="misc/contact" class="OverlayTrigger" data-overlayOptions="{&quot;fixed&quot;:false}">Contact Us</a></li>
+				
+				<li><a href="help/">Help</a></li>
+				<li><a href="https://forums.freebsd.org/" class="homeLink">Home</a></li>
+				<li><a href="/threads/52311/#navigation" class="topLink">Top</a></li>
+				<li><a href="forums/-/index.rss" rel="alternate" class="globalFeed" target="_blank"
+					title="RSS feed for The FreeBSD Forums">RSS</a></li>
+			
+			</ul>
+			
+			<span class="helper"></span>
+		</div>
+	</div>
+</div>
+
+<div class="footerLegal">
+	<div class="pageWidth">
+		<div class="pageContent">
+			<ul id="legal">
+			
+				<li><a href="/forums/forum-rules-and-guidelines-required-reading.49/">Terms and Rules</a></li>
+				
+			
+			</ul>
+			
+			<div id="copyright"><a href="https://xenforo.com" class="concealed">Forum software by XenForo&trade; <span>&copy;2010-2016 XenForo Ltd.</span></a> 
+			<br/>The mark FreeBSD is a registered trademark of The FreeBSD Foundation and is used by The FreeBSD Project with the permission of The FreeBSD Foundation.</div>
+			
+		
+			
+			
+			<span class="helper"></span>
+		</div>
+	</div>	
+</div>
+
+</footer>
+
+<script>
+
+
+jQuery.extend(true, XenForo,
+{
+	visitor: { user_id: 0 },
+	serverTimeInfo:
+	{
+		now: 1507063245,
+		today: 1506985200,
+		todayDow: 2
+	},
+	_lightBoxUniversal: "0",
+	_enableOverlays: "1",
+	_animationSpeedMultiplier: "1",
+	_overlayConfig:
+	{
+		top: "10%",
+		speed: 200,
+		closeSpeed: 100,
+		mask:
+		{
+			color: "rgb(255, 255, 255)",
+			opacity: "0.6",
+			loadSpeed: 200,
+			closeSpeed: 100
+		}
+	},
+	_ignoredUsers: [],
+	_loadedScripts: {"thread_view":true,"message":true,"bb_code":true,"message_user_info":true,"likes_summary":true,"freebsd_org_top_navigation_menu":true,"login_bar":true},
+	_cookieConfig: { path: "/", domain: "", prefix: "xf_"},
+	_csrfToken: "",
+	_csrfRefreshUrl: "login/csrf-token-refresh",
+	_jsVersion: "16052222",
+	_noRtnProtect: false,
+	_noSocialLogin: false
+});
+jQuery.extend(XenForo.phrases,
+{
+	cancel: "Cancel",
+
+	a_moment_ago:    "A moment ago",
+	one_minute_ago:  "1 minute ago",
+	x_minutes_ago:   "%minutes% minutes ago",
+	today_at_x:      "Today at %time%",
+	yesterday_at_x:  "Yesterday at %time%",
+	day_x_at_time_y: "%day% at %time%",
+
+	day0: "Sunday",
+	day1: "Monday",
+	day2: "Tuesday",
+	day3: "Wednesday",
+	day4: "Thursday",
+	day5: "Friday",
+	day6: "Saturday",
+
+	_months: "January,February,March,April,May,June,July,August,September,October,November,December",
+	_daysShort: "Sun,Mon,Tue,Wed,Thu,Fri,Sat",
+
+	following_error_occurred: "The following error occurred",
+	server_did_not_respond_in_time_try_again: "The server did not respond in time. Please try again.",
+	logging_in: "Logging in",
+	click_image_show_full_size_version: "Click this image to show the full-size version.",
+	show_hidden_content_by_x: "Show hidden content by {names}"
+});
+
+// Facebook Javascript SDK
+XenForo.Facebook.appId = "";
+XenForo.Facebook.forceInit = false;
+
+
+</script>
+
+
+
+
+</body>
+</html>

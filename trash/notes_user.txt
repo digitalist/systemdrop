@@ -1,0 +1,113 @@
+#root tasks:
+###sudoers
+# cd /usr/ports/security/sudo/ && make install clean
+## Or as a binary package, enter:
+# pkg install security/sudo
+
+#YY_MON_DAY_HR_MIN
+sudo date 1710060032
+
+
+
+### getting data from linux:
+sudo sh installs/ext4fuse.sh
+
+#create mount-point
+mkdir -p /path/to/mount/
+# mount:
+ext4fuse /dev/device1partition4 /path/to/mount/
+
+
+
+### GENERAL RULE:
+=============================================================
+                ALWAYS look at pkg-message
+_____________________________________________________________
+sysctl kern.ipc.shm_allow_removed=1
+To preserve this setting across reboots, append the following
+to /etc/sysctl.conf :
+kern.ipc.shm_allow_removed=1
+
+	example from http://www.freshports.org/www/chromium/
+
+	it will give you a hint on what to do after install
+=============================================================
+
+
+#slack:
+pkg install diligent
+
+
+### Find window manager:
+https://askubuntu.com/a/466153
+xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t :
+
+###Lumina-fluxbox:
+mkdir -p ~/.fluxbox/styles
+
+#hardcoding fluxbox theme:
+#echo "session.styleFile: ~/.fluxbox/styles/fluxbox_theme_name >> ~/.lumina/fluxbox-init 
+
+using gtk themes:
+http://fluxbox-wiki.org/category/howtos/en/Using_gtk_themes.html
+
+###terminals:
+1. install tmux.
+2. install something other than xterm: gnome terminal+tmux for example, or terminator
+lumina+ terminator notes:
+alt[arrows] are conflicting with lumina:
+Lumina->preferences->KeyboardShortcuts->ArrangeWindowStackRight/ArrangeWindowStackLeft
+
+
+###links
+some linux->freebsd commands
+trueos is freebsd + lumina + appcafe and some setup
+https://www.trueos.org/handbook/introducing.html#common-commands
+
+
+###LOCALIZATION
+http://marvins.ru/administrirovanie/utf-8-v-konsoli-i-terminale-freebsd-10-2.html
+
+http://www.maxblogs.ru/articles/rusifikatsiya-freebsd-2:
+ /etc/rc.conf
+keymap="ru" #capslock
+
+
+vpn
+### ------------------------------------------------------------------------
+###  Edit /etc/rc.conf[.local] to start OpenVPN automatically at system
+###  startup. See /usr/local/etc/rc.d/openvpn for details.
+### ------------------------------------------------------------------------
+###  Connect to VPN server as a client with this command to include
+###  the client.up/down scripts in the initialization:
+###  openvpn-client <spec>.ovpn
+### ------------------------------------------------------------------------
+###  For compatibility notes when interoperating with older OpenVPN
+###  versions, please, see <http://openvpn.net/relnotes.html>
+### ------------------------------------------------------------------------
+chsh -s /usr/local/bin/bash
+
+lumina/firefox zoom: ctrl+shift+mouse wheel
+
+###xorg:
+setxkbmap -v 10 |  grep  -q -F microsoft   || setxkbmap -layout "us,ru" -option "grp:caps_toggle,grp_led:caps,numpad:microsoft" 
+https://www.freebsd.org/doc/handbook/x-config.html
+/usr/local/etc/X11/xorg.conf.d/kbd-layout-multi.conf
+Section	"InputClass"
+	Identifier	"All Keyboards"
+	MatchIsKeyboard	"yes"
+	Option		"XkbLayout" "us, ru"
+EndSection
+
+#nvidia:
+#kldload linux
+(?)pkg install x11/nvidia-driver
+echo sysrc kld_list+="nvidia-modeset" >> /etc/rc.conf
+mkdir -p /usr/local/etc/X11/xorg.conf.d
+
+#pw groupmod video -m user || pw groupmod wheel -m user
+
+fsck -yf /dev/nvd0p3
+https://wiki.freebsd.org/Graphics/SCFB
+service netif restart
+sysctl net.wlan.devices
