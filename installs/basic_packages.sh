@@ -14,4 +14,7 @@ tmux \
 vim \
 mc \
 jq
+# additional:
+    # ack-grep
+    # ripgrep
 

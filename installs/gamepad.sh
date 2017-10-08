@@ -1,9 +1,10 @@
+# antimicro is an xorg application, it allows to map usb gamepad to keyboard
+# useful for emulators / remote GUI
+pkg install xf86-input-joystick uhidd antimicro
 
 
 #sysrc uhidd_flags="-kmohs"
 #sysrc uhidd_enable="YES"
-pkg install xf86-input-joystick uhidd
-
 
 #Message from uhidd-0.2.1_3:
 #==============================================================================

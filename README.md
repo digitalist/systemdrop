@@ -37,7 +37,8 @@ context switching when working with servers. I want to try another flavour of OS
 - Network/devops: ssh✔, openvpn, docker, git✔, vim✔, python3✔, c++/cmake
 - IDEs: PyCharm✔, CLion✔, QT (for visual gui design)
 - Small GUI editors: atom/jedit/sublime/vscode 
-  
+- Some gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`)
+
 @todo: describe EVENT_01, add links to  
 
  
