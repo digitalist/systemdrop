@@ -113,8 +113,8 @@ do not add `if_iwm_load="YES"` to rc.confi, it can cause KERNEL PANIC
 
 ## 8. Editors/Misc/Java
 PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
-
-@todo: _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on 
+- CLion need workaround: see `bugs/clion.2017.txt`
+jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on` 
 
 ## 9. Unresolved Issues
 - see `bugs/` directory 

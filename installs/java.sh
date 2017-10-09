@@ -9,7 +9,14 @@ grep fdesc /etc/fstab >>/dev/null || echo "fdesc	/dev/fd		fdescfs		rw	0	0" >> /e
 grep procfs /etc/fstab >>/dev/null || echo "proc	/proc		procfs		rw	0	0" >> /etc/fstab
 
 
-#env LD_PRELOAD=./jre64/lib/amd64/jli/libjli.so  ./jre64/bin/java
+#related:
+# sudo pkg install -y intellij-pty4j
+#./usr/local/intellij/lib/libpty/freebsd/x86_64/libpty.so
+#cp ./usr/home/user/prog/clion-2017.2.3/lib/libpty/linux/x86_64/libpty.so /compat/linux/lib64/
+#workaround:
+# https://intellij-support.jetbrains.com/hc/en-us/articles/206525024-How-to-start-CLion-on-FreeBSD-
+
+
 #env LD_PRELOAD ~/lib/blah.so program
 #or env LD_LIBRARY_PATH=~/lib:$LD_LIBRARY_PATH
 #https://lists.freebsd.org/pipermail/freebsd-java/2007-May/006279.html

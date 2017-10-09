@@ -1,0 +1,6 @@
+
+2bugs1url:
+see here:
+https://intellij-support.jetbrains.com/hc/en-us/articles/206525024-How-to-start-CLion-on-FreeBSD-
+
+We should create an issue/submit patch and fix this once and for all
