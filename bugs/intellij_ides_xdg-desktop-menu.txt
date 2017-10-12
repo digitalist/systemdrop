@@ -1,0 +1,7 @@
+
+there is a nice bug in freebsd11, xdg-desktop-menu never call detectDE function,
+so it doesn't see Lumina, instead it detects (in error) gnome.
+IntelliJ-based IDEs (pycharm/clion/phpstorm) use xdg-desktop-menu to place launcher entries.
+
+So they don't get to Lumina menu
+Ken Moore (@beanpole135) Oct 12 20:57: sounds like something that needs to be fixed in xdg-desktop-menu then

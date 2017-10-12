@@ -89,15 +89,6 @@ chsh -s /usr/local/bin/bash
 
 lumina/firefox zoom: ctrl+shift+mouse wheel
 
-###xorg:
-setxkbmap -v 10 |  grep  -q -F microsoft   || setxkbmap -layout "us,ru" -option "grp:caps_toggle,grp_led:caps,numpad:microsoft" 
-https://www.freebsd.org/doc/handbook/x-config.html
-/usr/local/etc/X11/xorg.conf.d/kbd-layout-multi.conf
-Section	"InputClass"
-	Identifier	"All Keyboards"
-	MatchIsKeyboard	"yes"
-	Option		"XkbLayout" "us, ru"
-EndSection
 
 #nvidia:
 #kldload linux
