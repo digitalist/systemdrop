@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 pkg install -y  \
 xorg \
 lumina \

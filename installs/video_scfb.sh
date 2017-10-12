@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 # manual way of setting video-mode for scfb console / xorg:
 # type 3 during boot time (boot prompt)
 # gop mode

@@ -1,4 +1,5 @@
-#getting data from linux partition, read only:
+#@IgnoreInspection BashAddShebang
+# getting data from linux partition, read only:
 
 pkg install -y fusefs-ext4fuse
 

@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 # https://www.freebsd.org/doc/handbook/ports-using.html
 # portsnap fetch
 # portsnap extract

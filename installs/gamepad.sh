@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 # antimicro is an xorg application, it allows to map usb gamepad to keyboard
 # useful for emulators / remote GUI
 pkg install xf86-input-joystick uhidd antimicro

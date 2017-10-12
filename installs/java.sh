@@ -1,4 +1,5 @@
-pkg install -y openjdk8
+#@IgnoreInspection BashAddShebang
+# pkg install -y openjdk8
 
 # check if fdesc/procfs are mounted
 mount | grep fdesc > /dev/null 2>&1  || mount -t fdescfs fdesc /dev/fd

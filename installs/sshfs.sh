@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 #ATTENTION: SCRIPT WORKS FINE
 # SSHFS DOES NOT MOUNT :-)
 # @todo: fix and remove from issues

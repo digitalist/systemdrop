@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 # if you're: locked out of xorg because of gpu driver crash
 # use lynx / wget / curl for downloading/browsing
 # install git to control your config changes

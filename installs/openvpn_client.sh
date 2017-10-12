@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 #!/usr/bin/env sh
 mkdir -p /usr/local/etc/openvpn && cd /usr/local/etc/openvpn
 # place these files into /usr/local/etc/openvpn:

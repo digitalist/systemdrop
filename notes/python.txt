@@ -28,3 +28,4 @@ mysql80-client-8.0.0_3         Multithreaded SQL database (client)
 
 #for example:
 pkg install mysql80-client
+

@@ -63,15 +63,6 @@ If you have enough time to read about it, choose ZFS. Choose UFS for experiments
 
 ### Basic commands
 
-- symlinks:
-
-    Worth noticing, `ln -s` command mirrors its destination/target arguments on linux/BSD:
-    
-    ` ln -s destination source # Linux`
-    
-    ` ln -s source destination # FreeBSD`
-
-
 - Linux: `yum` / `apt` ... etc 
 - FreeBSD: `pkg`, ports,
 
