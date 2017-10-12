@@ -111,3 +111,17 @@ fsck -yf /dev/nvd0p3
 https://wiki.freebsd.org/Graphics/SCFB
 service netif restart
 sysctl net.wlan.devices
+
+
+04:16:07-user~/.gnome/apps$ xdg-desktop-menu install ./jetbrains-pycharm.desktop
+04:16:15-user~/.gnome/apps$ find ~/ | grep desktop | grep jetbr
+/home/user/.local/share/applications/jetbrains-pycharm.desktop
+/home/user/.gnome/apps/jetbrains-pycharm.desktop
+04:16:18-user~/.gnome/apps$ env | grep XDG
+XDG_CONFIG_HOME=/home/user/.config
+XDG_DATA_DIRS=/usr/local/share:/usr/share
+XDG_CURRENT_DESKTOP=Lumina
+XDG_CACHE_HOME=/home/user/.cache
+XDG_DATA_HOME=/home/user/.local/share
+XDG_CONFIG_DIRS=/etc/xdg:/usr/local/etc/xdg
+04:18:24-user~/.gnome/apps$

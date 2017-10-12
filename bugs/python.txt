@@ -1,0 +1,30 @@
+{'keywords': ['libmysqlclient-dev', 'python', 'ubuntu', 'mysql']}
+
+
+Collecting mysqlclient==1.3.10 (from -r requirements.txt (line 40))
+  Downloading mysqlclient-1.3.10.tar.gz (82kB)
+    100% |████████████████████████████████| 92kB 886kB/s
+    Complete output from command python setup.py egg_info:
+    /bin/sh: mysql_config: not found
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-gaedk4up/mysqlclient/setup.py", line 17, in <module>
+        metadata, options = get_config()
+      File "/tmp/pip-build-gaedk4up/mysqlclient/setup_posix.py", line 44, in get_config
+        libs = mysql_config("libs_r")
+      File "/tmp/pip-build-gaedk4up/mysqlclient/setup_posix.py", line 26, in mysql_config
+        raise EnvironmentError("%s not found" % (mysql_config.path,))
+    OSError: mysql_config not found
+
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-gaedk4up/mysqlclient/
+
+
+pkg search mysql | grep client:
+mysql55-client-5.5.57          Multithreaded SQL database (client)
+mysql56-client-5.6.37_1        Multithreaded SQL database (client)
+mysql57-client-5.7.19_2        Multithreaded SQL database (client)
+mysql80-client-8.0.0_3         Multithreaded SQL database (client)
+
+#for example:
+pkg install mysql80-client
