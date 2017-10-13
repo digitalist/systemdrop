@@ -34,11 +34,11 @@ context switching when working with servers. I want to try another flavour of OS
 
 ### Subtargets:
 - Hardware: hardware GPUs, WiFi✔ , mobile/LTE ✔
-- Network/devops: ssh✔, openvpn, docker, git✔, vim✔, python3✔, c++/cmake
+- Network/devops: ssh✔, openvpn✔, docker, git✔, python3✔, pyenv/pipenv, c++✔/cmake✔
 - IDEs: PyCharm✔, CLion✔, QT (for visual gui design)
-- Small GUI editors: atom/jedit/sublime/vscode 
+- Small editors: atom/jedit✔,sublime, vscode, vim✔ 
 - Some gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`)
-
+ 
 @todo: describe EVENT_01, add links to  
 
  
@@ -60,6 +60,11 @@ If you have enough time to read about it, choose ZFS. Choose UFS for experiments
 - FreeBSD is OS. It has derivatives like TrueOS, friends like OpenBSD 
 - Directory structure (/etc -> /usr/local/etc), `man hier`
 - Default user shell is not bash (change for user: `chsh -s /usr/local/bin/bash`), avoid changing shell for root
+
+### 4.1 Fixing usability issues:
+By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`, or `ssh [TAB] lo`->`ssh localhost`, check 
+ `installs/bash-completion.sh`  
+
 
 ### Basic commands
 
