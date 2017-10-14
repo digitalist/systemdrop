@@ -43,8 +43,9 @@ context switching when working with servers. I want to try another flavour of OS
 - Network/devops: ssh✔, openvpn✔, git✔, python3✔, pyenv✔ / pipenv, c++✔/cmake✔, tmux✔, docker
 - IDEs: PyCharm✔, CLion✔, QT Builder (visual GUI design)
 - Small editors: atom/jedit✔, sublime, vscode, vim✔ 
-- Some gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`)
-- Misc: torrents✔
+- Gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`) scummvm, dosbox
+- Misc: torrents✔, virtualbox
+- BSD: jails, bhyve(?), zfs
 
 @todo: describe EVENT_01, add links to  
 
