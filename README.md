@@ -23,12 +23,15 @@ For example: `sudo sh installs/java.sh` will install OpenJDK 8
 
 ## 2. Rationale
 There are two main reasons to migrate from Linux to FreeBSD
-- SystemD: abomination-from-another-dimension, ever mutating monster. 
+1. SystemD: abomination-from-another-dimension, ever mutating monster. 
 Monolithic piece of architectural nightmare that turned Linux into a horrible altar of stupidity. 
 If you ever heard of KISS principle, failsafe system, loose coupling: it's not  about systemd
 
-- Six years is a long enough time to know Linux like a good friend. I don't need to have a linux desktop to avoid
+2. Six years is a long enough time to know Linux like a good friend. I don't need to have a linux desktop to avoid
 context switching when working with servers. I want to try another flavour of OS. Another community, find something new and something better
+
+3. clang/LLVM included!
+
 - Small target: make everything as good as it was in Linux. 
 - Ideal target: better than Linux (thanks, systemd it's an easy target now)
 
@@ -95,6 +98,7 @@ see `installs/video_scfb.sh` for setting console/xorg high resolution
 ## 6. Xorg/GUI
 - Localization
 - Fonts
+By default Firefox uses only 3 system fonts which leads to horrible results.  Fix this by opening `about:config` `->` `gfx.font_rendering.fontconfig.max_generic_substitutions` `:` `127`
 
 ## 7. Network
 - WiFi: add WiFi networks without GUI: see `config/etc/wpa_supplicant.conf` and `intalls/wifi.sh`

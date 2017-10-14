@@ -97,7 +97,7 @@ FreeBSD поддерживает как минимум два (а то и бол
 
 ## 6. Xorg/GUI
 - @todo: локализация
-- @todo шрифты, жуткие шрифты в дефолтном firefox
+жуткие шрифты в дефолтном Firefox лечатся так: `about:config`, `gfx.font_rendering.fontconfig.max_generic_substitutions=127`
 - включить сглаживание шрифтов в Java - см ниже в `Редакторы/Разное/Java`
 
 ## 7. Сеть
