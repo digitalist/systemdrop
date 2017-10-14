@@ -4,8 +4,11 @@
 ##### 0. tl;dr: Running sum: 
 - FreeBSD GUI programs crash a lot less than Ubuntu's.
 - It feels faster (maybe because of Lumina)
+- If you're like 'I wanna full userfriendly mode' - Try TrueOS. It's like (in a good way) Ubuntu of FreeBSD. 
+These notes/scripts still can be useful if something goes wrong. 
 
 ## 1. Preface
+
 You are reading a fall/winter 2017 year notes about my  attempt[currently] to migrage from Linux (Ubuntu 14/17) to FreeBSD 11. 
 
 For about 5-6 years  Linux was my main OS on every home/office/computer/server system I worked with.
@@ -81,6 +84,10 @@ By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`,
 - Ubuntu: `apt install -y vim`
 - FreeBSD: `pkg install -y vim`
 
+#### Admin/diagnostic
+    sysctl -a #aka linux procfs - https://www.freebsd.org/doc/en/articles/linux-users/procfs.html
+   
+
 ### Packages/ports system 
 FreeBSD has two (or more) modes of software distribution: 
 - packages (linux: yum/apt)
@@ -95,12 +102,7 @@ If you can't get video working with nvidia/intel/amd:
 use vesa driver for BIOS, scfb driver for UEFI
 see `installs/video_scfb.sh` for setting console/xorg high resolution 
 
-## 6. Xorg/GUI
-- Localization
-- Fonts
-By default Firefox uses only 3 system fonts which leads to horrible results.  Fix this by opening `about:config` `->` `gfx.font_rendering.fontconfig.max_generic_substitutions` `:` `127`
-
-## 7. Network
+## 6. Network
 - WiFi: add WiFi networks without GUI: see `config/etc/wpa_supplicant.conf` and `intalls/wifi.sh`
 - Start DHCP for USB-modem (Android phone, in my case) `dhclient ue0`, 
 - OpenVPN: if you have client config files, see `installs/openvpn_client.sh`
@@ -108,21 +110,30 @@ By default Firefox uses only 3 system fonts which leads to horrible results.  Fi
 IMPORTANT: if you have Intel laptop with Intel WiFi and use FreeBSD11
 do not add `if_iwm_load="YES"` to rc.confi, it can cause KERNEL PANIC
 
+## 7. Sound:
+See `installs/misc/poor_hoomans_sound.sh` for managing soundcards through console/without soundserver
+
+## 8. Xorg/GUI
+- Localization
+- Fonts
+By default Firefox uses only 3 system fonts which leads to horrible results.  Fix this by opening `about:config` `->` `gfx.font_rendering.fontconfig.max_generic_substitutions` `:` `127`
+
+
 #### Links:
 - https://ramsdenj.com/2016/07/25/openvpn-on-freebsd-10_3.html#client-config
 - http://www.freebsddiary.org/openvpn.php
 
-## 8. Editors/Misc/Java
+## 9. Editors/Misc/Java
 PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
 - CLion need workaround: see `bugs/clion.2017.txt`
 jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on` 
 
-## 9. Unresolved Issues
+## 10. Unresolved Issues
 - see `bugs/` directory 
 - sshfs, see `installs/sshfs.sh`
 - how to use ~/.login_conf and cap_mkdb? It's totally ignored!
 
-## 10. Debug tools 
+## 11. Debug tools 
 - *truss* is *strace* of FreeBSD. Example:
 `truss sshfs -d -f user@example.com:/ ~/mnt/example.com 2>&1 | grep ERR`
 
