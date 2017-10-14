@@ -5,7 +5,7 @@
 - Гуевые программы на FreeBSD крашатся реже, чем на Убунте. 
 - Ощущается как "быстрее" - не при загрузке, но зато это не systemd.
 
-## 1. Preface 
+## 1. Вступление 
 Вы читаете мои заметки  - сезона осень/зима-2017  - о переезде с Linux (Ubuntu 14/17) на FreeBSD 11
 
 5-6 лет Linux был моей основной (единственной на самом деле) рабочей системой на каждом компьютере с которым я работал,
@@ -22,7 +22,7 @@
 
 К примеру: `sudo sh installs/java.sh` установит OpenJDK 8
 
-## 2. Rationale
+## 2. Но зачеееееем
 Для меня есть две основные причины мигрировать на FreeBSD:
 1. SystemD:  выродок-из-другого-измерения. Вечно мутирующий монстр.  
 Монолитный кусок архитректурного кошмара, который превратил Linux  в храм поклонения идиотизму и невежеству. 
@@ -30,11 +30,13 @@
 2. Шесть лет - достаточно долгий срок чтобы подружиться с Linux, с недавних пор мне ненужен рабочий Linux-десктом чтобы избежать 
 переключений ментального контекста, когда я работаю с серверами. Я хочу попробовать другкю разновидность ОС, другое соообщество, 
 найти что-то новое, что-то лучше. 
+3. clang/llvm из коробки
 
+### Цели
 - Мини-цель: сделать всю рабочую среду такой же удобной, как в Linux 
 - Идеальня цель: лучше чем Linux - благодарим systemd - это очень легко.
 
-### Subtargets:
+### Подцели:
 - Железо: железные GPUs, WiFi✔ , mobile/LTE ✔
 - Сеть/devops: ssh✔, openvpn✔, docker, git✔, python3✔, pyenv/pipenv, c++✔/cmake✔
 - IDEs: PyCharm✔, CLion✔, QT (for visual gui design)
@@ -44,33 +46,33 @@
 @todo: describe EVENT_01, add links to  
 
  
-## 3. Installation notes
+## 3. Установка 
 ### Media:
 Если вы устанавливаете с USB, качайте *memstick image*, при обнаружении странных ошибок во время установки, проверьте:
     
-- Неотносящееся к FreeBSD: Is your flash ok? I had to buy a new flash, because mine had some irreversible errors. 
-- Relevant: It must a memstick image or unpacked memstick.xz, not DVD.iso
+- Неотносящееся к FreeBSD: рэндомные ошибки могут быть признаком подыхающей флэшки, столкнулся с этим
+- Относящееся: It must a memstick image or unpacked memstick.xz, not DVD.iso
 
-### First time console:
-installs/basic_packages_console.sh
+### Консоль для начинающих
+смотри `installs/basic_packages_console.sh`
 
-### Filesytems:
-If you have enough time to read about it, choose ZFS. Choose UFS for experiments/recover/`fsck -yf`      
+### Файловые системы:
+Если есть вермя разобраться, выбирайте ZFS. Иначе берите UFS и запомните команду `fsck -yf`      
     
 ## 4. Basic differences from Linux
-- Linux is not an OS, Linux distribution (i.e. Ubuntu) is OS.
-- FreeBSD is OS. It has derivatives like TrueOS, friends like OpenBSD 
-- Directory structure (/etc -> /usr/local/etc), `man hier`
-- Default user shell is not bash (change for user: `chsh -s /usr/local/bin/bash`), avoid changing shell for root
+- Linux - не ОС, дистрибутив Linux - например - Ubuntu/SuSE) - ОС.
+- FreeBSD - ОС. У нее есть производные ОС - TrueOS, или  братские - например, OpenBSD 
+- Слегка различается структура каталогов (/etc -> /usr/local/etc), `man hier`
+- Дефолтный шелл  - не bash (сменить для пользователя: `chsh -s /usr/local/bin/bash`), не меняйте шелл для рута
 
-### 4.1 Fixing usability issues:
-By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`, or `ssh [TAB] lo`->`ssh localhost`, check 
- `installs/bash-completion.sh`  
+### 4.1 Чиним юзабилити:
+По дефолту Ubuntu включает автодополнение команд bash (и дополнительно ssh), тиипа `git i[TAB]` `->` `git init`, 
+или `ssh [TAB] lo`->`ssh localhost`, смотри:  `installs/bash-completion.sh`  
 
 
-### Basic commands
+### Различия в простых командах
 
-- Linux: `yum` / `apt` ... etc 
+- Linux: `yum` / `apt` ... и т.д.
 - FreeBSD: `pkg`, ports,
 
 - Linux: `synaptic` / Ubuntu Software center
@@ -79,48 +81,49 @@ By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`,
 - Ubuntu: `apt install -y vim`
 - FreeBSD: `pkg install -y vim`
 
-### Packages/ports system 
-FreeBSD has two (or more) modes of software distribution: 
-- packages (linux: yum/apt)
-- ports - building from source code ()see `installs/ports.sh`)
+### Пакеты/порты 
+FreeBSD поддерживает как минимум два (а то и больше) режима распространения и установки софта: 
+- пакеты (как linux-овые: yum/apt)
+- порты - построение из исходного кода смотри (`installs/ports.sh`). 
 
+Смотри `installs/basic_packages.sh` - там программы, которые я использовал (использую и сейчас) при миграции. 
+Все они существуют и в Linux-мире.
 
-see `installs/basic_packages.sh` for tools I needed during migration and/or am using now. All of them exist in Linux-world too.
-
-## 5. Graphics
-### SCFB driver
-If you can't get video working with nvidia/intel/amd: 
-use vesa driver for BIOS, scfb driver for UEFI
-see `installs/video_scfb.sh` for setting console/xorg high resolution 
+## 5. Графика
+### SCFB драйвер
+Если у вас не заводятся драйверы nvidia/intel/amd: 
+используйте vesa driver если загружаетесь в BIOS-режиме, scfb driver в режиме UEFI,
+см. `installs/video_scfb.sh` про выставление  разрешения для консоли/xorg   
 
 ## 6. Xorg/GUI
-- Localization
-- Fonts
+- @todo: локализация
+- @todo шрифты, жуткие шрифты в дефолтном firefox
+- включить сглаживание шрифтов в Java - см ниже в `Редакторы/Разное/Java`
 
-## 7. Network
-- WiFi: add WiFi networks without GUI: see `config/etc/wpa_supplicant.conf` and `intalls/wifi.sh`
-- Start DHCP for USB-modem (Android phone, in my case) `dhclient ue0`, 
-- OpenVPN: if you have client config files, see `installs/openvpn_client.sh`
+## 7. Сеть
+- WiFi: добавление WiFi сетей без GUI (с GUI я просто не смотрел): см `config/etc/wpa_supplicant.conf` и `intalls/wifi.sh`
+- Запуск DHCP для USB-модема (Android телефон в моем случае) `dhclient ue0`, 
+- OpenVPN: если есть файлы конфигурации клиента, смотри `installs/openvpn_client.sh`
 
-IMPORTANT: if you have Intel laptop with Intel WiFi and use FreeBSD11
-do not add `if_iwm_load="YES"` to rc.confi, it can cause KERNEL PANIC
+ВАЖНО: на ноутбуках с intel-чипсетами и с Intel WiFi-железом  и FreeBSD11
+не добавляйте `if_iwm_load="YES"` в rc.config может бросить ядро в панику
 
-#### Links:
+#### Ссылки:
 - https://ramsdenj.com/2016/07/25/openvpn-on-freebsd-10_3.html#client-config
 - http://www.freebsddiary.org/openvpn.php
 
-## 8. Editors/Misc/Java
-PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
-- CLion need workaround: see `bugs/clion.2017.txt`
-jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on` 
+## 8. `Редакторы/Разное/Java`
+PyCharm/CLion/IntelliJ  и ваще Java-based software: see `installs/java.sh` 
+- CLion нужен костылек, иначе подвисает процесс компиляции: see `bugs/clion.2017.txt`
+jedit / ужасные шрифты в Java: выставить переменную  `_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on` 
 
-## 9. Unresolved Issues
-- see `bugs/` directory 
-- sshfs, see `installs/sshfs.sh`
-- how to use ~/.login_conf and cap_mkdb? It's totally ignored!
+## 9. Нерешенные проблемы и @todo
+- см `bugs/` directory 
+- sshfs -`installs/sshfs.sh`
+- how to use ~/.login_conf and cap_mkdb? It's totally ignored! Кажется, срабатывает после ребута, а не после разлогинивания. Проверить.
 
-## 10. Debug tools 
-- *truss* is *strace* of FreeBSD. Example:
+## 10. Инструменты отладки 
+- *truss* это *strace*  от FreeBSD. Пример:
 `truss sshfs -d -f user@example.com:/ ~/mnt/example.com 2>&1 | grep ERR`
 
 - dtrace: kernel/userspace debugg tracing : 

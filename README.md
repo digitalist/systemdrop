@@ -34,11 +34,12 @@ context switching when working with servers. I want to try another flavour of OS
 
 ### Subtargets:
 - Hardware: hardware GPUs, WiFi✔ , mobile/LTE ✔
-- Network/devops: ssh✔, openvpn✔, docker, git✔, python3✔, pyenv/pipenv, c++✔/cmake✔
-- IDEs: PyCharm✔, CLion✔, QT (for visual gui design)
-- Small editors: atom/jedit✔,sublime, vscode, vim✔ 
+- Network/devops: ssh✔, openvpn✔, git✔, python3✔, pyenv✔ / pipenv, c++✔/cmake✔, tmux✔, docker
+- IDEs: PyCharm✔, CLion✔, QT Builder (visual GUI design)
+- Small editors: atom/jedit✔, sublime, vscode, vim✔ 
 - Some gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`)
- 
+- Misc: torrents✔
+
 @todo: describe EVENT_01, add links to  
 
  
