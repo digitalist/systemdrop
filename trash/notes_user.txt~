@@ -1,7 +1,3 @@
-
-
-/etc/xdg/menus/arch-applications.menu
-
 #root tasks:
 ###sudoers
 # cd /usr/ports/security/sudo/ && make install clean

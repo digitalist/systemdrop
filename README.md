@@ -117,7 +117,9 @@ See `installs/misc/poor_hoomans_sound.sh` for managing soundcards through consol
 ## 8. Xorg/GUI
 - Localization
 - Fonts
-By default Firefox uses only 3 system fonts which leads to horrible results.  Fix this by opening `about:config` `->` `gfx.font_rendering.fontconfig.max_generic_substitutions` `:` `127`
+By default Firefox uses only 3 system fonts which leads to horrible results.  Fix this by opening 
+`about:config` `->` `gfx.font_rendering.fontconfig.max_generic_substitutions` `:` `127`. Stumbled on a bug with
+*.woff fonts, fixed with switching font settings in about:config / content preferences (allow pages to use own fonts)
 
 
 #### Links:

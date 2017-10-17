@@ -6,7 +6,7 @@ dmesg | grep pcm  #show sound devices
 # pcm1: <Realtek ALC235 (Front Analog Headphones)> at nid 33 on hdaa0
 # pcm2: <Intel Skylake (HDMI/DP 8ch)> at nid 3 on hdaa1
 
-# root/sudo to set default headphones:
+# root/sudo to set default headphones: # by joel @ https://forums.freebsd.org/threads/9413/#post-55889
 sysctl hw.snd.default_unit=1
 
 # root/sudo get back to laptop speakers:

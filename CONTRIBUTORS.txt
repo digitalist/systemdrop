@@ -1,1 +1,6 @@
-Thomas S. Rasmussen/@tykling # bsd/gnu ln controversy (man is evil)
+Thomas S. Rasmussen/@tykling # bsd/gnu ln controversy (gnu/bsd man is evil)
+
+
+Thanks:
+
+Joel [https://forums.freebsd.org/members/2/] for advice on sound, https://forums.freebsd.org/threads/9413/#post-55889
