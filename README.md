@@ -74,16 +74,37 @@ By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`,
  `installs/bash-completion.sh`  
 
 
+
+| locationID |  lft  |  rgt  |
+|------------|-------|-------|
+|  66007616  |    8  |   85  |
+|  66008840  |   86  |  605  |
+|  66008831  |  606  |  925  |
+|  66011279  |  926  | 1241  |
+|  66008453  | 1242  | 1523  |
+|  66013316  | 1528  | 1769  |
+|  66010271  | 1770  | 1901  |
+|  66000173  | 1902  | 1907  |
+|  66008450  | 1908  | 3273  |
+|  66008324  | 3314  | 3391  |
+|  66003473  | 3410  | 3499  |
+|  66010529  | 3504  | 4815  |
+|  66007361  | 5288  | 5305  |
+
+
+
+
 ### Basic commands
 
-- Linux: `yum` / `apt` ... etc 
-- FreeBSD: `pkg`, ports,
+|Linux|FreeBSD|
+|---|---|
+|`yum` / `apt` / `rpm` |`pkg` / ports|
+|`apt install -y vim`| `pkg install -y vim`|
+|`synaptic`|`AppCafe` *|
+|`lsb_release -a`|`freebsd-version`|
 
-- Linux: `synaptic` / Ubuntu Software center
-- FreeBSD: `AppCafe`
+*from TrueOS
 
-- Ubuntu: `apt install -y vim`
-- FreeBSD: `pkg install -y vim`
 
 #### Admin/diagnostic
     sysctl -a #aka linux procfs - https://www.freebsd.org/doc/en/articles/linux-users/procfs.html
