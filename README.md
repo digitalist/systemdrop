@@ -85,6 +85,9 @@ By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`,
 
 *from TrueOS
 
+#### Links:
+https://www.cyberciti.biz/tips/freebsd-display-information-about-the-system.html
+
 
 #### Admin/diagnostic
     sysctl -a #aka linux procfs - https://www.freebsd.org/doc/en/articles/linux-users/procfs.html
