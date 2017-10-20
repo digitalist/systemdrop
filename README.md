@@ -115,6 +115,10 @@ see `installs/video_scfb.sh` for setting console/xorg high resolution
 IMPORTANT: if you have Intel laptop with Intel WiFi and use FreeBSD11
 do not add `if_iwm_load="YES"` to rc.confi, it can cause KERNEL PANIC
 
+#### Links:
+- https://ramsdenj.com/2016/07/25/openvpn-on-freebsd-10_3.html#client-config
+- http://www.freebsddiary.org/openvpn.php
+
 ## 7. Sound:
 See `installs/misc/poor_hoomans_sound.sh` for managing soundcards through console/without soundserver
 
@@ -126,9 +130,7 @@ By default Firefox uses only 3 system fonts which leads to horrible results.  Fi
 *.woff fonts, fixed with switching font settings in about:config / content preferences (allow pages to use own fonts)
 
 
-#### Links:
-- https://ramsdenj.com/2016/07/25/openvpn-on-freebsd-10_3.html#client-config
-- http://www.freebsddiary.org/openvpn.php
+
 
 ## 9. Editors/Misc/Java
 PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
