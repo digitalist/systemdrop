@@ -44,7 +44,7 @@ context switching when working with servers. I want to try another flavour of OS
 - IDEs: PyCharm✔, CLion✔, QT Builder (visual GUI design)
 - Small editors: atom/jedit✔, sublime, vscode, vim✔ 
 - Gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`) scummvm, dosbox
-- Misc: torrents✔, virtualbox
+- Misc: torrents✔, virtualbox✔
 - BSD: jails, bhyve(?), zfs
 
 @todo: describe EVENT_01, add links to  
@@ -135,7 +135,17 @@ PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
 - CLion need workaround: see `bugs/clion.2017.txt`
 jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on` 
 
-## 10. Unresolved Issues
+## 10. Virtualization and CPU
+### Hardware: 
+- CPU features flags: `grep Features /var/run/dmesg.boot` , VMX must be there,  
+- Not relevant to BSD, same error as in Linux: some buggy BIOS (like mine) need to trigger this flag in BIOS Setup to actually work.
+- Ubuntu has CPU microcode updates enabled by default, we too are trying to be user-friendly here, see: `installs/cpu-microcode.sh`
+ 
+### VirtualBox
+- see `installs/virtualbox.sh`
+- don't forget to add your user to vboxusers group and reboot
+ 
+## 11. Unresolved Issues
 - see `bugs/` directory 
 - sshfs, see `installs/sshfs.sh`
 - how to use ~/.login_conf and cap_mkdb? It's totally ignored!
