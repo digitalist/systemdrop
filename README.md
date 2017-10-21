@@ -146,6 +146,7 @@ jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAF
 ### VirtualBox
 - see `installs/virtualbox.sh`
 - don't forget to add your user to vboxusers group and reboot
+- if you need to r/w access your ext4fs data, you can use virtualbox raw access mode. See `installs/virtualbox-raw-access.sh` 
  
 ## 11. Unresolved Issues
 - see `bugs/` directory 
@@ -156,7 +157,7 @@ jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAF
 - *truss* is *strace* of FreeBSD. Example:
 `truss sshfs -d -f user@example.com:/ ~/mnt/example.com 2>&1 | grep ERR`
 
-- dtrace: kernel/userspace debugg tracing : 
+- dtrace: kernel/userspace debug tracing : 
 https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/dtrace.html    
 
     

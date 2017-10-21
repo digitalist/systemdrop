@@ -114,7 +114,18 @@ printf  "\nThe vboxusers group is created during installation of VirtualBox™. 
 pw groupmod vboxusers -m $USER
 # you should reboot here
 
-#BOOT UNDO
+# INSIDE GUEST LINUX ===================================================================================================
+# /dev/sda is your original virtual disk in a common setup
+# /dev/sdb is your RAW / fake vmdk disk
+# /dev/sdb3 is you example partition on /dev/sdb
+# sudo mount /dev/sdb3 /some/directory
+# install gparted or parted or use fdisk to edit partitions
+
+# TO ACCESS SHARED FOLDERS
+# install VirtualBox Guest Additions
+# sudo usermod -G vboxsf -a $USER; sudo reboot
+
+# HOST BSD BOOT-TIME TROUBLE SHOOTING ==================================================================================
 #unload module_name #vboxdrv
 #disable-module module_name #vboxdrv
 #boot
