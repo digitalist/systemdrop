@@ -19,11 +19,15 @@
 
 # restart devfs to apply rules: ========================================================================================
 # /etc/rc.d/devfs restart
-
+sudo VBoxManage internalcommands createrawvmdk -filename /usr/home/user/ada0.vmdk -rawdisk /dev/ada0
 
 # create fake vmdk file, filename MUST be absolute =====================================================================
 #sudo VBoxManage internalcommands createrawvmdk -filename /usr/home/user/mnt/vbox/ada0.vmdk -rawdisk /dev/ada0
     #it should say RAW host disk access VMDK file /usr/home/user/mnt/vbox/ada0.vmdk created successfully.
+
+#vboxmanage clonevm ubuntu_16 --name ubuntu_16_nozfs --basefolder /home/user/virtual_box_no_zfs_vm/  --register
+
+
 
 # fix permissions ======================================================================================================
 #sudo chown user:user ada0.vmdk
@@ -36,3 +40,6 @@
 # either use GUI: VM Settings->Storage->Use Host I/O cache or:
 # VBoxManage storagectl "VM name" --name <controllername> --hostiocache on
 # VBoxManage storagectl "ubuntu_16" --name SATA --hostiocache on
+
+# DANGER: ==============================================================================================================
+# DO NOT RUN Virtualbox VM with raw access if your drive is mounted in host OS. Don't forget to disconnect vmdk from VM

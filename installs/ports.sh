@@ -19,3 +19,10 @@ svn checkout https://svn.FreeBSD.org/ports/head /usr/ports
 
 # As needed, update /usr/ports after the initial Subversion checkout:
 svn update /usr/ports
+
+
+# To enable
+# make search string=NAME
+# functionality
+cd /usr/ports
+make index #make fetchindex

@@ -80,14 +80,15 @@ By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`,
 |---|---|
 |`yum` / `apt` / `rpm` |`pkg` / ports|
 |`apt install -y vim`| `pkg install -y vim`|
+|`apt show vim`| `pkg-info vim`|
 |`synaptic`|`AppCafe` *|
 |`lsb_release -a`|`freebsd-version`|
 
 *from TrueOS
 
 #### Links:
-https://www.cyberciti.biz/tips/freebsd-display-information-about-the-system.html
-
+- https://www.cyberciti.biz/tips/freebsd-display-information-about-the-system.html
+- https://wiki.freebsd.org/PkgPrimer pkg examples from wiki
 
 #### Admin/diagnostic
     sysctl -a #aka linux procfs - https://www.freebsd.org/doc/en/articles/linux-users/procfs.html
@@ -130,24 +131,33 @@ By default Firefox uses only 3 system fonts which leads to horrible results.  Fi
 *.woff fonts, fixed with switching font settings in about:config / content preferences (allow pages to use own fonts)
 
 
-
-
 ## 9. Editors/Misc/Java
 PyCharm/CLion/IntelliJ, other Java-based software: see `installs/java.sh`
-- CLion need workaround: see `bugs/clion.2017.txt`
-jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on` 
+- CLion needs a workaround: see `bugs/clion.2017.txt`
+jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on` (.xinitrc, for example) 
 
-## 10. Virtualization and CPU
+## 10. Virtualization & containers
 ### Hardware: 
 - CPU features flags: `grep Features /var/run/dmesg.boot` , VMX must be there,  
 - Not relevant to BSD, same error as in Linux: some buggy BIOS (like mine) need to trigger this flag in BIOS Setup to actually work.
 - Ubuntu has CPU microcode updates enabled by default, we too are trying to be user-friendly here, see: `installs/cpu-microcode.sh`
+
+### Jails
+Jails are like linux light-weight containers.  Setting up a jail manually may be useful for the curious, but
+since FreeNAS suggests to use [iocage](https://github.com/iocage/iocage/) as a convenient interface/wrappers for jails,
+begin with them or google 'FreeBSD jail tools' 
  
 ### VirtualBox
 - see `installs/virtualbox.sh`
 - don't forget to add your user to vboxusers group and reboot
 - if you need to r/w access your ext4fs data, you can use virtualbox raw access mode. See `installs/virtualbox-raw-access.sh` 
- 
+
+### Docker
+- "quazi-native" (with VirtualBox backend)
+- [bhyve-based](https://www.bsdstore.ru/en/articles/docker_on_freebsd.html)  
+
+
+
 ## 11. Unresolved Issues
 - see `bugs/` directory 
 - sshfs, see `installs/sshfs.sh`
