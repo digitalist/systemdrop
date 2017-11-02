@@ -40,12 +40,12 @@ context switching when working with servers. I want to try another flavour of OS
 
 ### Subtargets:
 - Hardware: hardware GPUs, WiFi✔ , mobile/LTE ✔
-- Network/devops: ssh✔, openvpn✔, git✔, python3✔, pyenv✔ / pipenv, c++✔/cmake✔, tmux✔, docker
+- Network/devops: ssh✔, openvpn✔, git✔, python3✔, pyenv✔ / pipenv, c++✔/cmake✔, tmux✔, docker✔
 - IDEs: PyCharm✔, CLion✔, QT Builder (visual GUI design)
 - Small editors: atom/jedit✔, sublime, vscode, vim✔ 
-- Gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`) scummvm, dosbox
-- Misc: torrents✔, virtualbox✔
-- BSD: jails, bhyve(?), zfs
+- Gaming: emulators✔ with gamepad✔ (see `installs/gamepad.sh`) ScummVM, DosBox
+- Misc: torrents✔, VirtualBox✔ Slack video calls ✔
+- BSD: jails, bhyve(?), zfs✔
 
 @todo: describe EVENT_01, add links to  
 
@@ -145,12 +145,17 @@ jedit / Horrible Java Fonts solution: setenv:  `_JAVA_OPTIONS=-Dawt.useSystemAAF
 ### Jails
 Jails are like linux light-weight containers.  Setting up a jail manually may be useful for the curious, but
 since FreeNAS suggests to use [iocage](https://github.com/iocage/iocage/) as a convenient interface/wrappers for jails,
-begin with them or google 'FreeBSD jail tools' 
+I'll try to use iocage for now.
+
+Another option is [cbsd](https://www.bsdstore.ru/en/about.html): it works with Jails, Xen and bhyve
+
  
 ### VirtualBox
 - see `installs/virtualbox.sh`
 - don't forget to add your user to vboxusers group and reboot
-- if you need to r/w access your ext4fs data, you can use virtualbox raw access mode. See `installs/virtualbox-raw-access.sh` 
+- if you need to r/w access your ext4fs data, you can use VirtualBox raw access mode. See `installs/virtualbox-raw-access.sh` 
+- OpenGL/Slack video calls/Chrome work with software rasterization with Ubuntu 16.04 as a VirutalBox guest 
+
 
 ### Docker
 - "quazi-native" (with VirtualBox backend)
