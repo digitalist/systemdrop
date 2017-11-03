@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 mkdir modules.good 
 cp kernel kernel.good
