@@ -162,12 +162,6 @@ Another option is [cbsd](https://www.bsdstore.ru/en/about.html): it works with J
 - [bhyve-based](https://www.bsdstore.ru/en/articles/docker_on_freebsd.html)  
 
 
-
-## 11. Unresolved Issues
-- see `bugs/` directory 
-- sshfs, see `installs/sshfs.sh`
-- how to use ~/.login_conf and cap_mkdb? It's totally ignored!
-
 ## 11. Debug tools 
 - *truss* is *strace* of FreeBSD. Example:
 `truss sshfs -d -f user@example.com:/ ~/mnt/example.com 2>&1 | grep ERR`
@@ -175,7 +169,22 @@ Another option is [cbsd](https://www.bsdstore.ru/en/about.html): it works with J
 - dtrace: kernel/userspace debug tracing : 
 https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/dtrace.html    
 
-    
+
+## 12. Cross-platform compatibility 
+### GNU sed to BSD sed:     
+- BSD sed does not support escape sequences (like `\t\n\r`) in searches 
+- to make BSD sed compatible with GNU `sed -i` place another operator after `-i`, i.e.: `sed -i -E`
+- use `-E` to get GNU-compatible regexps
+### Shell scripts:
+Use `#!/bin/env bash` shebang instead of  `#!/bin/bash` linuxism (same with any other shebang types, shell or python)
+### Ubuntu vi/ex/vim:
+Ubuntu's `ex -sc '1i|# pylint: skip-file' -cx filename` is BSD's `vim -E -s '1i|# pylint: skip-file' -cx filename`        
+
+## 13. Unresolved Issues
+- see `bugs/` directory 
+- sshfs, see `installs/sshfs.sh`
+- how to use ~/.login_conf and cap_mkdb? It's totally ignored!
+
 ### Notes and links
 http://adventurist.me/posts/028871
 https://wiki.archlinux.org/index.php/Xorg_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
