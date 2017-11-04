@@ -170,13 +170,16 @@ Another option is [cbsd](https://www.bsdstore.ru/en/about.html): it works with J
 https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/dtrace.html    
 
 
-## 12. Cross-platform compatibility 
+## 12. Cross-platform compatibility
+
+### Shell scripts:
+Use `#!/bin/env bash` shebang instead of  `#!/bin/bash` linuxism (same with any other shebang types, shell or python)
+ 
 ### GNU sed to BSD sed:     
 - BSD sed does not support escape sequences (like `\t\n\r`) in searches 
 - to make BSD sed compatible with GNU `sed -i` place another operator after `-i`, i.e.: `sed -i -E`
 - use `-E` to get GNU-compatible regexps
-### Shell scripts:
-Use `#!/bin/env bash` shebang instead of  `#!/bin/bash` linuxism (same with any other shebang types, shell or python)
+
 ### Ubuntu vi/ex/vim:
 Ubuntu's `ex -sc '1i|# pylint: skip-file' -cx filename` is BSD's `vim -E -s '1i|# pylint: skip-file' -cx filename`        
 
