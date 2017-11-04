@@ -191,7 +191,7 @@ Ubuntu's `ex -sc '1i|# pylint: skip-file' -cx filename` is BSD's `vim -E -s '1i|
 - sshfs, see `installs/sshfs.sh`
 - how to use ~/.login_conf and cap_mkdb? It's totally ignored!
 
-### Notes and links
-http://adventurist.me/posts/028871
-https://wiki.archlinux.org/index.php/Xorg_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
-http://www.ivoras.net/blog/tree/2013-06-03.openvpn-on-freebsd.html
+### Notes and links (sort this later)
+- http://adventurist.me/posts/028871
+- https://wiki.archlinux.org/index.php/Xorg_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
+- http://www.ivoras.net/blog/tree/2013-06-03.openvpn-on-freebsd.html
