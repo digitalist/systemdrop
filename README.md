@@ -177,8 +177,11 @@ Use `#!/bin/env bash` shebang instead of  `#!/bin/bash` linuxism (same with any 
  
 ### GNU sed to BSD sed:     
 - BSD sed does not support escape sequences (like `\t\n\r`) in searches 
-- to make BSD sed compatible with GNU `sed -i` place another operator after `-i`, i.e.: `sed -i -E`
+- to make BSD sed compatible with GNU `sed -i` place another operator after `-i`, i.e.: `sed -i -s -E`
 - use `-E` to get GNU-compatible regexps
+
+### GNU find / POSIX find
+- POSIX find doesn't support `-printf` operator, `pkg install -y findutils`, change `find` to `gfind` in your scripts 
 
 ### Ubuntu vi/ex/vim:
 Ubuntu's `ex -sc '1i|# pylint: skip-file' -cx filename` is BSD's `vim -E -s '1i|# pylint: skip-file' -cx filename`        

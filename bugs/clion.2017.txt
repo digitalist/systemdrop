@@ -4,3 +4,12 @@ see here:
 https://intellij-support.jetbrains.com/hc/en-us/articles/206525024-How-to-start-CLion-on-FreeBSD-
 
 We should create an issue/submit patch and fix this once and for all
+
+
+by Leon Greff: ================================================================
+FreeBSD has replacement program for fsnotifier
+`pkg install intellij-fsnotifier`
+then edit bin/idea.properties
+`idea.filewatcher.executable.path=/usr/local/intellij/bin/fsnotifier`
+===============================================================================
+
