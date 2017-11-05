@@ -180,11 +180,22 @@ Use `#!/bin/env bash` shebang instead of  `#!/bin/bash` linuxism (same with any 
 - to make BSD sed compatible with GNU `sed -i` place another operator after `-i`, i.e.: `sed -i -s -E`
 - use `-E` to get GNU-compatible regexps
 
-### GNU find / POSIX find
+### GNU find / POSIX find / etc.
 - POSIX find doesn't support `-printf` operator, `pkg install -y findutils`, change `find` to `gfind` in your scripts 
+
+### Make
+GNU Make is `gmake`. If you see a lot of abnormal make errors, check you're using right version of it.
 
 ### Ubuntu vi/ex/vim:
 Ubuntu's `ex -sc '1i|# pylint: skip-file' -cx filename` is BSD's `vim -E -s '1i|# pylint: skip-file' -cx filename`        
+
+### Python:
+By design, FreeBSD does not provide default `python` version, there are python2 and python3, but any program which depends
+on finding `python` in the path will fail. For example, `pyenv global system` does not find `python` and fails.
+- fix with `pkg install lang/python` will make (at @11) python2 default.
+- fix with symlink: `sudo ln -s /usr/local/bin/python3 /usr/local/bin/python`
+ 
+
 
 ## 13. Unresolved Issues
 - see `bugs/` directory 
