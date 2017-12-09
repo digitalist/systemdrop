@@ -102,3 +102,11 @@ fcitx -r -d
 #and then Japanese input works. If this changes as packages get updated, I'll update it here. But for now, you can
 # either use the LC_CTYPE=ja_JP mentioned above or use another browser. (Chromium and Opera work with Japanese withou
 # t problem.)
+
+#anthy
+#export XIM=ibus
+#export GTK_IM_MODULE=ibus
+#export QT_IM_MODULE=xim
+#export XMODIFIERS=@im=ibus
+#export XIM_PROGRAM="ibus-daemon"
+#export XIM_ARGS="-r --daemonize --xim"
