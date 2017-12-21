@@ -80,7 +80,7 @@ By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`,
 |---|---|
 |`yum` / `apt` / `rpm` |`pkg` / ports|
 |`apt install -y vim`| `pkg install -y vim`|
-|`apt show vim`| `pkg-info vim`|
+|`apt show vim`| `pkg info vim`|
 |`synaptic`|`AppCafe` *|
 |`lsb_release -a`|`freebsd-version`|
 
@@ -173,7 +173,7 @@ https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/dtrace.html
 ## 12. Cross-platform compatibility
 
 ### Shell scripts:
-Use `#!/bin/env bash` shebang instead of  `#!/bin/bash` linuxism (same with any other shebang types, shell or python)
+Use `#!/usr/bin/env bash` shebang instead of  `#!/bin/bash` linuxism (same with any other shebang types, shell or python)
  
 ### GNU sed to BSD sed:     
 - BSD sed does not support escape sequences (like `\t\n\r`) in searches 
@@ -194,7 +194,7 @@ By design, FreeBSD does not provide default `python` version, there are python2 
 on finding `python` in the path will fail. For example, `pyenv global system` does not find `python` and fails.
 - fix with `pkg install lang/python` will make (at @11) python2 default.
 - fix with symlink: `sudo ln -s /usr/local/bin/python3 /usr/local/bin/python`
- 
+- fix with correct shebang line (if you can edit sources) 
 
 
 ## 13. Unresolved Issues
