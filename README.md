@@ -1,5 +1,5 @@
 # Project SystemDrop
-##### Linux  -> FreeBSD migration notes, 2017
+##### Linux  -> FreeBSD migration notes, 2017-2018
 
 ##### 0. tl;dr: Running sum: 
 - FreeBSD GUI programs crash a lot less than Ubuntu's.
@@ -60,9 +60,19 @@ If you're going to install from USB, download *memstick image*. If you encounter
 ### First time console:
 installs/basic_packages_console.sh
 
-### Filesytems:
+### Filesystems:
 If you have enough time to read about it, choose ZFS. Choose UFS for experiments/recover/`fsck -yf`      
+
+
+- ext4 noatime analog (disabling access time writes is a commond speed-up tip for modern *nix systems): 
     
+    `zfs set atime=off pool` or `zfs set atime=off pool/path`  
+
+- mount (import) zfs-managed device: in case you've made a reinstall and want to restore a connection to already existing
+zfs data:
+    - `zpool list` to see the list of available pools 
+    - `zfs import POOLNAME` or `zfs import -f POOLNAME` 
+
 ## 4. Basic differences from Linux
 - Linux is not an OS, Linux distribution (i.e. Ubuntu) is OS.
 - FreeBSD is OS. It has derivatives like TrueOS, friends like OpenBSD 
@@ -99,8 +109,8 @@ FreeBSD has two (or more) modes of software distribution:
 - packages (linux: yum/apt)
 - ports - building from source code ()see `installs/ports.sh`)
 
-
 see `installs/basic_packages.sh` for tools I needed during migration and/or am using now. All of them exist in Linux-world too.
+
 
 ## 5. Graphics
 ### SCFB driver
