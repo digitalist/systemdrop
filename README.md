@@ -222,7 +222,7 @@ in case of  `/usr/bin/ld: cannot find -lffi`, see installs/python-pip-lib-fix.sh
 
 ## 14. TrueOS notes:
 
-- TrueOS uses OpenRC init system for managing services. See differences [here](https://www.trueos.org/handbook/using.html#managing-system-services-and-daemons). Example: autostart openvpn : `sudo rc-update add nginx default` 
+- TrueOS uses OpenRC init system for managing services. See differences [here](https://www.trueos.org/handbook/using.html#managing-system-services-and-daemons). Example: autostart openvpn : `sudo rc-update add openvpn default` 
 
 #### Getting Intel Graphics to work on "hybrid" laptops
 
