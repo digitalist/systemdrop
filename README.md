@@ -218,11 +218,11 @@ on finding `python` in the path will fail. For example, `pyenv global system` do
 
 - TrueOS uses OpenRC init system for managing services. See differences [here](https://www.trueos.org/handbook/using.html#managing-system-services-and-daemons). Example: autostart openvpn : `sudo rc-update add nginx default` 
 
-#### Getting Intel Graphics work on laptops
+#### Getting Intel Graphics to work on "hybrid" laptops
 
-    actual for FreeBSD 12.0-CURRENT FreeBSD 12.0-CURRENT #11 81fec14cc(trueos-master): Wed Dec 20 14:49:06 UTC 2017
+actual for `FreeBSD 12.0-CURRENT #11 81fec14cc(trueos-master): Wed Dec 20 14:49:06 UTC 2017`
      
-If you have intel+nvidia gpu laptop, there is a chance you have only two options: scfb (fast software driver, no OpenGl)
+If you have intel+nvidia gpu laptop, there is a chance that for now you have only two options: scfb (fast software driver, no OpenGl)
 and intel driver - so called `i915` (better).
 
 There's a chance intel driver will not load, saying something like `/i915kms.ko -unsupported file type`
