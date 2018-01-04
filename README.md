@@ -5,11 +5,12 @@
 - FreeBSD GUI programs crash a lot less than Ubuntu's.
 - It feels faster (maybe because of Lumina)
 - If you're like 'I wanna full userfriendly mode' - Try TrueOS. It's like (in a good way) Ubuntu of FreeBSD. 
+- My FreeBSD->TrueOS migration notes are in the new section #14
 These notes/scripts still can be useful if something goes wrong. 
 
 ## 1. Preface
 
-You are reading a fall/winter 2017 year notes about my  attempt[currently] to migrage from Linux (Ubuntu 14/17) to FreeBSD 11. 
+You are reading a fall/winter 2018 year notes about my  attempt[currently] to migrage from Linux (Ubuntu 14/17) to FreeBSD 11. 
 
 For about 5-6 years  Linux was my main OS on every home/office/computer/server system I worked with.
 
@@ -212,6 +213,56 @@ on finding `python` in the path will fail. For example, `pyenv global system` do
 - sshfs, see `installs/sshfs.sh`
 - how to use ~/.login_conf and cap_mkdb? It's totally ignored!
 
+
+## 14. TrueOS notes:
+
+- TrueOS uses OpenRC init system for managing services. See differences [here](https://www.trueos.org/handbook/using.html#managing-system-services-and-daemons). Example: autostart openvpn : `sudo rc-update add nginx default` 
+
+#### Getting Intel Graphics work on laptops
+
+    actual for FreeBSD 12.0-CURRENT FreeBSD 12.0-CURRENT #11 81fec14cc(trueos-master): Wed Dec 20 14:49:06 UTC 2017
+     
+If you have intel+nvidia gpu laptop, there is a chance you have only two options: scfb (fast software driver, no OpenGl)
+and intel driver - so called `i915` (better).
+
+There's a chance intel driver will not load, saying something like `/i915kms.ko -unsupported file type`
+You'll have to build it from sources.
+
+- ports sources
+
+        git clone http://github.com/trueos/freebsd-ports.git /usr/ports
+
+- kernel sources:
+    
+    
+        # find $revision and $branch of your kernel: uname -a
+        # get the kernel sources:
+        # git clone -b $branch --single-branch https://github.com/trueos/freebsd.git /usr/src           
+        # i.e.:   
+        git clone -b trueos-master --single-branch https://github.com/trueos/freebsd.git /usr/src
+        git checkout $revision           
+
+                                                                                                                                    
+- build:
+
+
+        cd /usr/ports/graphics/drm-next-kmod/ && make install clean        
+        # on install/reinstall error
+        # make deinstall && make reinstall
+        # test: 
+        kldload /boot/modules/i915kms.ko
+        # dmesg should not have errors
+
+- choose driver and enable opengl: 
+        
+        
+    1. uninstall nvidia driver using pkg/appcafe - it breaks opengl for intel driver.
+    2. choose intel driver at the login screen of desktop manager
+                                                                                                                                    
+
+
+
+ 
 ### Notes and links (sort this later)
 - http://adventurist.me/posts/028871
 - https://wiki.archlinux.org/index.php/Xorg_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)

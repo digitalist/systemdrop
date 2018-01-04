@@ -1,0 +1,39 @@
+strangeqargo
+what's the recommended way to learn why system did  core dump and reboot? :-)
+like logs, dumps etc. (latest unstable)
+Mike
+dmesg should probably be your first stop
+then /var/log/$FOO
+where $FOO is the application you are investigating
+coredumpsi'm still learnign about myself
+I don't recall where they are sent, but I bet the handbook knows ;)
+Ken Moore
+admin
+system core dumps need to be turned on if I remember right - I can't remember the exact sysctl for it offhand though
+Mike
+enabling coredums is a choice during the install iirc
+small flood
+/etc/login.conf:    :coredumpsize=unlimited:\
+/etc/login.conf:#    :coredumpsize=infinity:\
+/etc/login.conf:#    :coredumpsize=8M:\
+/etc/login.conf:#    :coredumpsize=infinity:\
+/etc/login.conf:#    :coredumpsize@:\
+/etc/login.conf:#    :coredumpsize-cur=0:\
+/etc/login.conf:#    :coredumpsize-cur=0:\
+/etc/login.conf:#    :coredumpsize=0:\
+looks like /etc/devd.conf is promising as well
+ahhh here we go
+/etc/sysctl.conf:kern.coredump=0
+set that to none zero to enable
+er non zero
+Ken Moore
+admin
+Thanks for looking that up!
+Mike
+np :)
+grep core /etc/*
+made it easy
+:wink:
+looks like /etc/devd.conf has options to enable automated debugging after a core dump amongst other things
+strangeqargo
+thanks

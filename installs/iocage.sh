@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # sudo here
 # maybe you should run `sudo sh iocage-jails-networking.sh` before proceeding further
-
-
+sudo pkg install py36-iocage
+#if ls -all rc.conf.trueos
+# rc-update add iocage default
+#else:
 sysrc iocage_enable="YES"
 sudo zfs create hdd-ada/iocage
-iocage activate hdd-ada # activate zpool
+iocage activate hdd-ada # activate zpool by name
 
 # sudo zfs allow user allow hdd-ada/iocage #idk if needed, or how to use iocage without root
 iocage fetch # choose & install FreeBSD release for the jail
