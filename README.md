@@ -117,7 +117,9 @@ see `installs/basic_packages.sh` for tools I needed during migration and/or am u
 ### SCFB driver
 If you can't get video working with nvidia/intel/amd: 
 use vesa driver for BIOS, scfb driver for UEFI
-see `installs/video_scfb.sh` for setting console/xorg high resolution 
+    
+- see `installs/video_scfb.sh` for setting console/xorg high resolution
+- see section 14 (TrueOS) for installing intel+opengl drivers 
 
 ## 6. Network
 - WiFi: add WiFi networks without GUI: see `config/etc/wpa_supplicant.conf` and `intalls/wifi.sh`
@@ -206,6 +208,10 @@ on finding `python` in the path will fail. For example, `pyenv global system` do
 - fix with `pkg install lang/python` will make (at @11) python2 default.
 - fix with symlink: `sudo ln -s /usr/local/bin/python3 /usr/local/bin/python`
 - fix with correct shebang line (if you can edit sources) 
+
+
+If you're getting errors installing some python packages, look into output.
+in case of  `/usr/bin/ld: cannot find -lffi`, see installs/python-pip-lib-fix.sh
 
 
 ## 13. Unresolved Issues
