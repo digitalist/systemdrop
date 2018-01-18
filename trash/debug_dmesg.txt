@@ -1,0 +1,42 @@
+hdac0: poll interval 1000 -> 500 ticks
+i915/skl_dmc_ver1_26.bin: could not load firmware image, error 2
+firmware: 'i915/skl_dmc_ver1_26.bin' version 0: 8928 bytes loaded at 0xffffffff836690d0
+[drm] Finished loading i915/skl_dmc_ver1_26.bin (v1.26)
+[drm] RC6 on
+ipfw2 (+ipv6) initialized, divert loadable, nat loadable, default to accept, logging disabled
+wlan0: bpf attached
+wlan0: bpf attached
+wlan0: Ethernet address: 58:fb:84:8e:ff:49
+wlan0: link state changed to UP
+uhid0 on uhub0
+uhid0: <Logitech USB Receiver, class 0/0, rev 2.00/12.01, addr 1> on usbus0
+random: harvesting attach, 8 bytes (4 bits) from uhid0
+ubt0 on uhub0
+ubt0: <vendor 0x8087 product 0x0a2a, class 224/1, rev 2.00/0.01, addr 3> on usbus0
+random: harvesting attach, 8 bytes (4 bits) from ubt0
+tun0: bpf attached
+tun0: link state changed to UP
+nd6_dad_timer: cancel DAD on tun0 because of ND6_IFF_IFDISABLED.
+hdac0: poll interval 500 -> 5 ticks
+hdac0: poll interval 5 -> 500 ticks
+pid 3865 (fsnotifier), uid 1001: exited on signal 10
+pid 4351 (fsnotifier), uid 1001: exited on signal 10
+kbdc: TEST_AUX_PORT status:0000
+kbdc: RESET_AUX return code:00fa
+kbdc: RESET_AUX status:00aa
+kbdc: RESET_AUX ID:0000
+pid 7194 (fsnotifier), uid 1001: exited on signal 10
+pid 8313 (fsnotifier), uid 1001: exited on signal 10
+
+
+Fatal trap 12: page fault while in kernel mode
+cpuid = 2; apic id = 04
+fault virtual address   = 0x148
+fault code              = supervisor read data, page not present
+instruction pointer     = 0x20:0xffffffff805711e3
+stack pointer           = 0x28:0xfffffe00907546d0
+frame pointer           = 0x28:0xfffffe0090754700
+code segment            = base 0x0, limit 0xfffff, type 0x1b
+                        = DPL 0, pres 1, long 1, def32 0, gran 1
+processor eflags        = interrupt enabled, resume, IOPL = 0
+current process         = 12 (irq12: psm0)

@@ -1,7 +1,6 @@
-Thomas S. Rasmussen/@tykling # bsd/gnu ln controversy (gnu/bsd man is evil)
-
-
 Thanks:
+Thomas S. Rasmussen/@tykling # bsd/gnu ln controversy (gnu/bsd man is evil)
 Joel [@freebsd.forum:/2/] for advice on sound, https://forums.freebsd.org/threads/9413/#post-55889
 DutchDaemon [@freebsd.forum:/812/]  advice on CPU features / virtualization, https://forums.freebsd.org/threads/10553/#post-63385
 SirDice [@freebsd.forum:/1677/]  lib32 ldconfig, https://forums.freebsd.org/threads/45878/#post-256773
+Rodney Myers [https://discourse.trueos.org/u/rodmyers/summary]

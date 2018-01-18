@@ -224,6 +224,9 @@ in case of  `/usr/bin/ld: cannot find -lffi`, see installs/python-pip-lib-fix.sh
 
 - TrueOS uses OpenRC init system for managing services. See differences [here](https://www.trueos.org/handbook/using.html#managing-system-services-and-daemons). Example: autostart openvpn : `sudo rc-update add openvpn default` 
 
+- TrueOS comes with a firewall (ipfw) and it's enabled by default. So you can't ssh into your machine unless you add
+`tcp 22` line to `/etc/ipfw.openports`
+
 #### Getting Intel Graphics to work on "hybrid" laptops
 
 actual for `FreeBSD 12.0-CURRENT #11 81fec14cc(trueos-master): Wed Dec 20 14:49:06 UTC 2017`
