@@ -1,0 +1,3 @@
+strangeqargo | are there any negative effects (apart from security one) if I'll chmod /usr/ports to 777 or change owner to user?
+relaxed | strangeqargo: no, it's probably more secure to fetch/svn as a regular user.
+relaxed | I chown /usr/ports to my username and have seperate dir for work for building as root. WRKDIRPREFIX=/usr/work in /etc/make.conf

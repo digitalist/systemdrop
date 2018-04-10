@@ -43,15 +43,20 @@ thanks
 
 /etc/sysctl.conf
 
-Done:
-
-$ grep -i dump /etc/sysctl.conf
 # Disable coredump
 # kern.coredump=0
 # https://discourse.trueos.org/t/obtaining-kernel-core-dumps/731/2
 kern.coredump=1
-$ 
 
+/etc/rc.conf
+
+dump_device="/dev/label/swap0"
+dumpdir="/var/crash"
+# I doubt those two lines are needed at all, I'm dumb:
+dumpon_enable="YES"
+savecore_enable="YES"
+
+#/etc/rc.d/savecore on trueos?
 /etc/conf.d/savecore
 
     … Don’t forget …
@@ -63,3 +68,9 @@ label/swap0.eli  ACTIVE  label/swap0
 $ grep -v \# /etc/conf.d/savecore
 
 dump_device=/dev/label/swap0
+
+
+https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=203276
+
+
+

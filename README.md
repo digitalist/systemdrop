@@ -108,9 +108,13 @@ By default Ubuntu allows bash autocompletion, like `git i[TAB]` `->` `git init`,
 ### Packages/ports system 
 FreeBSD has two (or more) modes of software distribution: 
 - packages (linux: yum/apt)
-- ports - building from source code ()see `installs/ports.sh`)
+- ports - building from source code see `installs/ports.sh`)
 
 see `installs/basic_packages.sh` for tools I needed during migration and/or am using now. All of them exist in Linux-world too.
+
+
+https://github.com/rosorio/pkg-provides
+https://unix.stackexchange.com/questions/5257/how-can-i-avoid-the-prompts-when-installing-a-freebsd-port
 
 
 ## 5. Graphics
